@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path(/authon/<name>, views.getauthor, name="author")
+    path("author/<name>", views.getauthor, name="author")
 ]

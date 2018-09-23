@@ -5,7 +5,7 @@ from django.shortcuts import render
 def index(request):
     return render(request, "index.html")
 
-def getauthon(request, name):
+def getauthor(request, name):
     return render(request, "profile.html")
 
 def getsingle(request, id):
