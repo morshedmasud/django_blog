@@ -7,7 +7,7 @@ class author(models.Model):
     details = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.name.username
 
 
 class category(models.Model):
@@ -22,6 +22,8 @@ class article(models.Model):
     title=models.CharField(max_length=200)
     body=models.TextField()
     category = models.ForeignKey(category, on_delete=models.CASCADE)
+    posted_on = models.DateTimeField(auto_now=False, auto_now_add=True)
+    update_on = models.DateField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
         return self.title
