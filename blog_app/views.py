@@ -1,9 +1,13 @@
 from django.shortcuts import render
-
+from .models import author, category, article
 # Create your views here.
 
 def index(request):
-    return render(request, "index.html")
+    posts = article.objects.all()
+    context = {
+        'posts': posts,
+    }
+    return render(request, "index.html", context)
 
 def getauthor(request, name):
     return render(request, "profile.html")

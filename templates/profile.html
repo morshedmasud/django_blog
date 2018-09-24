@@ -1,27 +1,27 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
+Author
+{% endblock %}
+
+
+{% block stylesheet %}
 <style type="text/css">
 	#fh5co-offcanvas {
 		width: auto;
 	}
 	#fh5co-offcanvas .fh5co-menu, #fh5co-offcanvas .fh5co-bio {
-		width: auto;
+		width: 300px;
 		padding: 50px;
 	}
 </style>
 {% endblock %}
 
-{% load static %}
-
-{% block stylesheet %}
-
-{% endblock %}
-
 {% block profile %}
 	<div class="fh5co-bio">
 		<figure>
-			<img src="{% static 'images/person1.jpg' %}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+			<img src="{% static 'images/masud(1).jpg' %}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
 		</figure>
 		<h3 class="heading">About Me</h3>
 		<h2>Emily Tran Le</h2>

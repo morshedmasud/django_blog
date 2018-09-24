@@ -21,6 +21,7 @@ class article(models.Model):
     article_author = models.ForeignKey(author, on_delete=models.CASCADE)
     title=models.CharField(max_length=200)
     body=models.TextField()
+    image = models.FileField()
     category = models.ForeignKey(category, on_delete=models.CASCADE)
     posted_on = models.DateTimeField(auto_now=False, auto_now_add=True)
     update_on = models.DateField(auto_now=True, auto_now_add=False)
