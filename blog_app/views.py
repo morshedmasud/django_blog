@@ -14,10 +14,22 @@ def getauthor(request, name):
 
 def getsingle(request, id):
     post = get_object_or_404(article, pk=id)
+    first = article.objects.first()
+    last = article.objects.last()
+    related = article.objects.filter(category=post.category).exclude(id=id)[:4]
     context ={
         'post':post,
+        'first':first,
+        'last':last,
+        'related':related,
     }
     return render(request, "single.html", context)
 
 def gettopic(request, name):
-    return render(request, 'category.html')
+    cat = get_object_or_404(category, name=name)
+    posts = article.objects.filter(category=cat.id)
+    context = {
+        'posts':posts,
+        'category':cat,
+    }
+    return render(request, 'category.html', context)
