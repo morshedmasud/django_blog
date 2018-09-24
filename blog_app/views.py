@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import author, category, article
 # Create your views here.
 
@@ -13,4 +13,11 @@ def getauthor(request, name):
     return render(request, "profile.html")
 
 def getsingle(request, id):
-    return render(request, "single.html")
+    post = get_object_or_404(article, pk=id)
+    context ={
+        'post':post,
+    }
+    return render(request, "single.html", context)
+
+def gettopic(request, name):
+    return render(request, 'category.html')

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class author(models.Model):
     name = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile_pic = models.FileField()
     details = models.TextField()
 
     def __str__(self):
