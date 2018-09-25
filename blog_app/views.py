@@ -33,3 +33,7 @@ def gettopic(request, name):
         'category':cat,
     }
     return render(request, 'category.html', context)
+
+
+def getlogin(request):
+    return render(request, 'login.html')

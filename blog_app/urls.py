@@ -7,7 +7,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('author/<name>', views.getauthor, name="author"),
     path('article/<int:id>', views.getsingle, name='single_post'),
-    path('topic/<name>', views.gettopic, name='topic')
+    path('topic/<name>', views.gettopic, name='topic'),
+    path('login', views.getlogin, name='login')
 ]
 
 # if settings.DEBUG:
