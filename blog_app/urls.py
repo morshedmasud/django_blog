@@ -9,7 +9,8 @@ urlpatterns = [
     path('article/<int:id>', views.getsingle, name='single_post'),
     path('topic/<name>', views.gettopic, name='topic'),
     path('login', views.getlogin, name="login"),
-    path('logout', views.getlogout, name='logout')
+    path('logout', views.getlogout, name='logout'),
+    path('create', views.getcreate, name='create')
 ]
 
 # if settings.DEBUG:

@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from .models import author, category, article
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
+from .forms import ArticleForm
 # Create your views here.
 
 def index(request):
@@ -78,3 +79,14 @@ def getlogin(request):
 def getlogout(request):
     logout(request)
     return redirect('index')
+
+def getcreate(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = ArticleForm(request.POST, request.FILES)
+            form.save()
+            return redirect('index')
+        form = ArticleForm
+        return render(request, 'create.html', {'form': form})
+    else:
+        return redirect('login')
