@@ -14,7 +14,7 @@ def index(request):
             Q(title__icontains=search) |
             Q(body__icontains=search)
         )
-    paginator = Paginator(posts, 4) # Show 8 contacts per page
+    paginator = Paginator(posts, 8) # Show 8 contacts per page
     page = request.GET.get('page')
     total_article = paginator.get_page(page)
     context = {
