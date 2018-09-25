@@ -4,15 +4,32 @@
 {% block title %} Mnuworld {% endblock %}
 
 {% block content %}
-
 {% for post in posts %}
 	<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
 		<figure>
 			<a href="{% url 'single_post' id=post.id %}"><img src="{{ post.image.url }}" class="img-responsive"></a>
 		</figure>
 		<span class="fh5co-meta"><a href="{% url 'topic' name=post.category.name %}">{{ post.category }}</a></span>
-		<h2 class="fh5co-article-title"><a href="{% url 'single_post' id=post.id %}">{{ post.title }}</a></h2>
+		<a href="{% url 'single_post' id=post.id %}"><h4 class="fh5co-article-title">{{ post.title }}</h4></a>
+		<h5><a href="{% url 'author' name=post.article_author.name.username %}">{{ post.article_author.name.get_full_name }}</a></h5>
 		<span class="fh5co-meta fh5co-date">{{ post.posted_on.date }}</span>
 	</article>
 {% endfor %}
+<div class="container-fluid">
+	<div class="pagination">
+		<span class="step-links">
+			{% if posts.has_previous %}
+				<a href="?page=1">&laquo; first</a>
+				<a href="?page={{ contacts.previous_page_number }}">previous</a>
+			{% endif %}
+			<span class="current">
+				Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+			</span>
+			{% if posts.has_next %}
+				<a href="?page={{ posts.next_page_number }}">next</a>
+				<a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+			{% endif %}
+		</span>
+	</div>
+</div>
 {% endblock %}

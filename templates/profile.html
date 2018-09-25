@@ -12,7 +12,7 @@ Author
 		width: auto;
 	}
 	#fh5co-offcanvas .fh5co-menu, #fh5co-offcanvas .fh5co-bio {
-		width: 300px;
+		width: 400px;
 		padding: 50px;
 	}
 </style>
@@ -21,11 +21,12 @@ Author
 {% block profile %}
 	<div class="fh5co-bio">
 		<figure>
-			<img src="{% static 'images/masud(1).jpg' %}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+			<img src="{{ auth.profile_pic.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
 		</figure>
 		<h3 class="heading">About Me</h3>
-		<h2>Emily Tran Le</h2>
-		<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+		<h2>{{ auth.name.get_full_name }}</h2>
+		<a href="mailto:{{ auth.name.email }}">{{ auth.name.email }}</a>
+		<p>{{ auth.details }}</p>
 		<ul class="fh5co-social">
 			<li><a href="#"><i class="icon-twitter"></i></a></li>
 			<li><a href="#"><i class="icon-facebook"></i></a></li>
@@ -35,21 +36,34 @@ Author
 {% endblock %}
 
 {% block content %}
-	<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
-		<figure>
-			<a href="#"><img src="{% static 'images/pic_7.jpg' %}" alt="Image" class="img-responsive"></a>
-		</figure>
-		<span class="fh5co-meta"><a href="#">Food &amp; Drinks</a></span>
-		<h2 class="fh5co-article-title"><a href="#">Enjoying the Native Juice Drink in Brazil</a></h2>
-		<span class="fh5co-meta fh5co-date">March 6th, 2016</span>
-	</article>
-	<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
-		<figure>
-			<a href="#"><img src="{% static 'images/pic_8.jpg' %}" alt="Image" class="img-responsive"></a>
-		</figure>
-		<span class="fh5co-meta"><a href="#">Travel</a>, <a href="#">Style</a></span>
-		<h2 class="fh5co-article-title"><a href="#">Boat Travel in The Vietnam River</a></h2>
-		<span class="fh5co-meta fh5co-date">March 6th, 2016</span>
-	</article>
-	<div class="clearfix visible-xs-block"></div>
+<div class="well">
+	<h3>Author: {{ auth.name.get_full_name }}</h3>
+</div>
+{% for post in posts%}
+<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
+	<figure>
+		<a href="{% url 'single_post' id=post.id %}"><img src="{{ post.image.url }}" alt="Image" class="img-responsive"></a>
+	</figure>
+	<span class="fh5co-meta"><a href="{% url 'topic' name=post.category %}">{{ post.category }}</a></span>
+	<h2 class="{% url 'single_post' id=post.id %}"><a href="#">{{ post.title }}</a></h2>
+	<span class="fh5co-meta fh5co-date">{{ post.posted_on }}</span>
+</article>
+{% endfor %}
+<div class="container-fluid">
+	<div class="pagination">
+		<span class="step-links">
+			{% if posts.has_previous %}
+				<a href="?page=1">&laquo; first</a>
+				<a href="?page={{ contacts.previous_page_number }}">previous</a>
+			{% endif %}
+			<span class="current">
+				Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+			</span>
+			{% if posts.has_next %}
+				<a href="?page={{ posts.next_page_number }}">next</a>
+				<a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+			{% endif %}
+		</span>
+	</div>
+</div>
 {% endblock %}
