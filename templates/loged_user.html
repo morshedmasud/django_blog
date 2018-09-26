@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block stylesheet %}
+{% endblock %}
+
+{% block profile %}
+<div class="fh5co-bio">
+    <figure>
+        <img src="{{ user.profile_pic.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+    </figure>
+    <h3 class="heading">About Me</h3>
+    <h2>{{ user.name.get_full_name }}</h2>
+    <a href="mailto:{{user.name.email}}">{{ user.name.email }}</a>
+    <p>{{ user.details }}</p>
+    <ul class="fh5co-social">
+        <li><a href="#"><i class="icon-twitter"></i></a></li>
+        <li><a href="#"><i class="icon-facebook"></i></a></li>
+        <li><a href="#"><i class="icon-instagram"></i></a></li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+            <a href="{% url 'create'%}" class="btn btn-success pull pull-right">Add new article</a>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>Title</td>
+                <td>Posted On</td>
+                <td>Action</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+                <tr>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.posted_on }}</td>
+                    <td><a href="{% url 'update' pk=post.id %}" class="btn btn-primary">Edit</a><a href="{% url 'delete' pk=post.id %}" class="btn btn-primary">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

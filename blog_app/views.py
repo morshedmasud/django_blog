@@ -82,11 +82,50 @@ def getlogout(request):
 
 def getcreate(request):
     if request.user.is_authenticated:
+        u = get_object_or_404(author, name=request.user.id)
+        print(u, '---------')
         if request.method == 'POST':
             form = ArticleForm(request.POST, request.FILES)
-            form.save()
+            instance = form.save(commit=False)
+            instance.article_author=u
+            instance.save()
+            print("save completer----")
             return redirect('index')
         form = ArticleForm
         return render(request, 'create.html', {'form': form})
+    else:
+        return redirect('login')
+
+
+def getprofile(request):
+    if request.user.is_authenticated:
+        posts = article.objects.filter(article_author=request.user.id)
+        user = get_object_or_404(author, name=request.user.id)
+        context = {
+            'posts': posts,
+            'user': user
+        }
+        return render(request, 'loged_user.html', context)
+
+
+def getupdate(request, pk):
+    if request.user.is_authenticated:
+        post = article.objects.get(id=pk)
+        if request.method == 'POST':
+            form = ArticleForm(request.POST, instance=post)
+            form.save()
+            return redirect('profile')
+        else:
+            form = ArticleForm(instance=post)
+        context = {'form': form}
+        return render(request, 'create.html', context)
+    return redirect('login')
+
+
+def getdelete(request, pk):
+    if request.user.is_authenticated:
+        post = get_object_or_404(article, id=pk)
+        post.delete()
+        return redirect('profile')
     else:
         return redirect('login')

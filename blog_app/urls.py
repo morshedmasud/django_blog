@@ -10,7 +10,10 @@ urlpatterns = [
     path('topic/<name>', views.gettopic, name='topic'),
     path('login', views.getlogin, name="login"),
     path('logout', views.getlogout, name='logout'),
-    path('create', views.getcreate, name='create')
+    path('create', views.getcreate, name='create'),
+    path('profile', views.getprofile, name='profile'),
+    path('update/<int:pk>', views.getupdate, name='update'),
+    path('delete/<int:pk>', views.getdelete, name='delete'),
 ]
 
 # if settings.DEBUG:
