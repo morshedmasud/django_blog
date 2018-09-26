@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from .forms import ArticleForm
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
@@ -74,6 +75,9 @@ def getlogin(request):
             if auth:
                 login(request, auth)
                 return redirect('index')
+            else:
+                messages.add_message(request, messages.ERROR, 'Username or password mismatch.')
+                # return render(request, 'login.html')
     return render(request, 'login.html')
 
 def getlogout(request):

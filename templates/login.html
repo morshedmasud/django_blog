@@ -20,6 +20,13 @@
             </div>
             <div class="panel-body">
                 <form action="" method="POST">
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="exampleInputEmail1">Username</label>
