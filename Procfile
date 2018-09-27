@@ -1,1 +1,1 @@
-web: gunicorn mnuworl.wsgi
+web: gunicorn mnuworl.wsgi --log-file--
