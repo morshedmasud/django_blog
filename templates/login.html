@@ -21,11 +21,11 @@
             <div class="panel-body">
                 <form action="" method="POST">
                         {% if messages %}
-                        <ul class="messages">
+                        <div class="messages">
                             {% for message in messages %}
                             <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
                             {% endfor %}
-                        </ul>
+                        </div>
                         {% endif %}
                     {% csrf_token %}
                     <div class="form-group">

@@ -11,7 +11,15 @@
 	#fh5co-offcanvas .fh5co-menu, #fh5co-offcanvas .fh5co-bio {
 		width: 350px;
 		padding: 50px;
-	}
+    }
+
+    .alert {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+    height: 50px;
+    margin-top: 200px;
+    }
 </style>
 {% endblock %}
 
@@ -33,6 +41,13 @@
 {% endblock %}
 
 {% block content %}
+{% if messages %}
+    <div class="messages">
+    {% for message in messages %}
+        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
     <div class="container">
             <a href="{% url 'create'%}" class="btn btn-success pull pull-right">Add new article</a>
         <table class="table table-striped">

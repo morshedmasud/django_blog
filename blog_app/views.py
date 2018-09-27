@@ -118,18 +118,21 @@ def getupdate(request, pk):
         if request.method == 'POST':
             form = ArticleForm(request.POST, instance=post)
             form.save()
+            messages.success(request, 'Article updated successfully')
             return redirect('profile')
         else:
             form = ArticleForm(instance=post)
-        context = {'form': form}
-        return render(request, 'create.html', context)
-    return redirect('login')
+            context = {'form': form}
+            return render(request, 'create.html', context)
+    else:
+        return redirect('login')
 
 
 def getdelete(request, pk):
     if request.user.is_authenticated:
         post = get_object_or_404(article, id=pk)
         post.delete()
+        messages.warning(request, "Article is deleted.")
         return redirect('profile')
     else:
         return redirect('login')
