@@ -4,8 +4,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
-from .forms import ArticleForm
+from .forms import ArticleForm, RegisterUser, CreateAuthor
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
+
 # Create your views here.
 
 def index(request):
@@ -105,13 +107,26 @@ def getcreate(request):
 
 def getprofile(request):
     if request.user.is_authenticated:
-        posts = article.objects.filter(article_author=request.user.id)
-        user = get_object_or_404(author, name=request.user.id)
-        context = {
-            'posts': posts,
-            'user': user
-        }
-        return render(request, 'loged_user.html', context)
+        user = get_object_or_404(User, id=request.user.id)
+        author_profile = author.objects.filter(name=user.id)
+        if author_profile:
+            authorUser = get_object_or_404(author, name=request.user.id)
+            posts = article.objects.filter(article_author=authorUser.id)
+            context = {
+                'posts': posts,
+                'user': authorUser
+            }
+            return render(request, 'loged_user.html', context)
+        else:
+            form = CreateAuthor(request.POST or None, request.FILES or None)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.name = user
+                instance.save()
+                return redirect('profile')
+            return render(request, 'createauthor.html', {'form':form})
+    else:
+        return redirect('login')
 
 
 def getupdate(request, pk):
@@ -138,3 +153,15 @@ def getdelete(request, pk):
         return redirect('profile')
     else:
         return redirect('login')
+
+def register(request):
+    form = RegisterUser(request.POST or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        messages.success(request, "Registration successfully completed")
+        return redirect('login')
+    content = {
+        'form': form,
+    }
+    return render(request, 'register.html', content)

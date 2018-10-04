@@ -14,6 +14,7 @@ urlpatterns = [
     path('profile', views.getprofile, name='profile'),
     path('update/<int:pk>', views.getupdate, name='update'),
     path('delete/<int:pk>', views.getdelete, name='delete'),
+    path('register/', views.register, name='register'),
 ]
 
 # if settings.DEBUG:
