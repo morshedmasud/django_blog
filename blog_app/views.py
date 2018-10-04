@@ -19,6 +19,7 @@ def index(request):
     paginator = Paginator(posts, 8) # Show 8 contacts per page
     page = request.GET.get('page')
     total_article = paginator.get_page(page)
+    print(total_article, "y---------")
     context = {
         'posts': total_article,
     }
@@ -41,6 +42,7 @@ def getsingle(request, id):
     post = get_object_or_404(article, pk=id)
     first = article.objects.first()
     last = article.objects.last()
+    print('last id:', last.id)
     related = article.objects.filter(category=post.category).exclude(id=id)[:4]
     context ={
         'post':post,
@@ -116,7 +118,7 @@ def getupdate(request, pk):
     if request.user.is_authenticated:
         post = article.objects.get(id=pk)
         if request.method == 'POST':
-            form = ArticleForm(request.POST, instance=post)
+            form = ArticleForm(request.POST, request.FILES, instance=post)
             form.save()
             messages.success(request, 'Article updated successfully')
             return redirect('profile')

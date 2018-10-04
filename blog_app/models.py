@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class author(models.Model):
     name = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile_pic = models.FileField()
+    profile_pic = models.FileField(upload_to = 'author_pic/')
     details = models.TextField()
 
     def __str__(self):
@@ -22,7 +22,7 @@ class article(models.Model):
     article_author = models.ForeignKey(author, on_delete=models.CASCADE)
     title=models.CharField(max_length=200)
     body=models.TextField()
-    image = models.FileField()
+    image = models.FileField(upload_to = 'product_image/')
     category = models.ForeignKey(category, on_delete=models.CASCADE)
     posted_on = models.DateTimeField(auto_now=False, auto_now_add=True)
     update_on = models.DateField(auto_now=True, auto_now_add=False)

@@ -37,10 +37,10 @@
 
 {% block content %}
 	{% if post.id > first.id %}
-	<a href="{% url 'single_post' id=post.id|add:'-1' %}" class="fh5co-post-prev"><span><i class="icon-chevron-left"></i> Prev</span></a>
+		<a href="{% url 'single_post' id=post.id|add:'-1' %}" class="fh5co-post-prev"><span><i class="icon-chevron-left"></i> Prev</span></a>
 	{% endif %}
 	{% if post.id < last.id %}
-	<a href="{% url 'single_post' id=post.id|add:'1' %}" class="fh5co-post-next"><span>Next <i class="icon-chevron-right"></i></span></a>
+		<a href="{% url 'single_post' id=post.id|add:'1' %}" class="fh5co-post-next"><span>Next <i class="icon-chevron-right"></i></span></a>
 	{% endif %}
 	<!-- END #fh5co-header -->
 	<div class="container-fluid">
