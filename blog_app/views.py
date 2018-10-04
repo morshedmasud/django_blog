@@ -95,7 +95,7 @@ def getcreate(request):
             instance = form.save(commit=False)
             instance.article_author=u
             instance.save()
-            print("save completer----")
+            messages.info(request, "New Post created")
             return redirect('profile')
         form = ArticleForm
         return render(request, 'create.html', {'form': form})
