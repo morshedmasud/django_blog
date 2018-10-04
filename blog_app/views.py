@@ -96,7 +96,7 @@ def getcreate(request):
             instance.article_author=u
             instance.save()
             print("save completer----")
-            return redirect('index')
+            return redirect('profile')
         form = ArticleForm
         return render(request, 'create.html', {'form': form})
     else:
