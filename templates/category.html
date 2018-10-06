@@ -16,21 +16,27 @@
 		<span class="fh5co-meta fh5co-date">{{ post.posted_on.date }}</span>
 	</article>
 {% endfor %}
-<div class="container-fluid">
-	<div class="pagination">
-		<span class="step-links">
+<div class="container">
+	{% if posts.has_other_pages %}
+		<ul class="pagination well">
 			{% if posts.has_previous %}
-				<a href="?page=1">&laquo; first</a>
-				<a href="?page={{ contacts.previous_page_number }}">previous</a>
+				<li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a></li>
+			{% else %}
+				<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
 			{% endif %}
-			<span class="current">
-				Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
-			</span>
+			{% for i in posts.paginator.page_range %}
+				{% if posts.number == i %}
+					<li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+				{% else %}
+					<li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+				{% endif %}
+			{% endfor %}
 			{% if posts.has_next %}
-				<a href="?page={{ posts.next_page_number }}">next</a>
-				<a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+				<li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">Next</a></li>
+			{% else %}
+				<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 			{% endif %}
-		</span>
-	</div>
+		</ul>
+	{% endif %}
 </div>
 {% endblock %}
