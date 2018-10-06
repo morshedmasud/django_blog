@@ -112,4 +112,4 @@ Pipfile.lock
 # Media file
 .media/*
 
-.masud/*
+.masud
