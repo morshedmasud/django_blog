@@ -107,9 +107,17 @@ venv.bak/
 # vs code
 .vscode
 
-Pipfile.lock
+
 
 # Media file
 media/*
 
 !media/.gitkeep
+
+# .DS_STORE
+.DS_Store
+
+
+# Pipfile.lock
+Pipfile.lock
+
