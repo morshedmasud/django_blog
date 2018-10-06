@@ -131,9 +131,10 @@ STATICFILES_DIRS = [
 
 # Media files
 MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+# Instance Message
 MESSAGE_TAGS = {
     messages.INFO: 'alert alert-info',
     messages.SUCCESS: 'alert alert-success',
