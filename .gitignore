@@ -111,7 +111,7 @@ Pipfile.lock
 
 # Media file
 
-!masud/*
+!masud/
 
 masud.txt
 masud2.txt
