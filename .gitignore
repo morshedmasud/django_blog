@@ -110,4 +110,6 @@ venv.bak/
 Pipfile.lock
 
 # Media file
-!media/
+media/*
+### exception to the rule
+!media/.keep
