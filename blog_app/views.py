@@ -21,7 +21,7 @@ def index(request):
     paginator = Paginator(posts, 8) # Show 8 contacts per page
     page = request.GET.get('page')
     total_article = paginator.get_page(page)
-    print(total_article, "y---------")
+    print("article total-- ", total_article)
     context = {
         'posts': total_article,
     }
