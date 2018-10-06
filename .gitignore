@@ -108,3 +108,6 @@ venv.bak/
 *.vscode
 
 Pipfile.lock
+
+# Media file
+.media/*
