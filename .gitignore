@@ -110,3 +110,6 @@ venv.bak/
 Pipfile.lock
 
 # Media file
+media/*
+
+!media/.gitkeep
