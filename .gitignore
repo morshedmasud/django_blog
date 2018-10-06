@@ -110,9 +110,4 @@ venv.bak/
 Pipfile.lock
 
 # Media file
-
-!masud/
-
-masud.txt
-masud2.txt
-
+!media/*
