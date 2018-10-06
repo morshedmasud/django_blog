@@ -112,7 +112,7 @@ venv.bak/
 # Media file
 media/*
 
-!media/.gitkeep
+!media/.keep
 
 # .DS_STORE
 .DS_Store
