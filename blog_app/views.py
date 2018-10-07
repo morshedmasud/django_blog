@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
-from .models import author, category, article
+from .models import author, category, article, Comment
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
-from .forms import ArticleForm, RegisterUser, CreateAuthor
+from .forms import ArticleForm, RegisterUser, CreateAuthor, CommentForm
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 
@@ -21,7 +21,6 @@ def index(request):
     paginator = Paginator(posts, 8) # Show 8 contacts per page
     page = request.GET.get('page')
     total_article = paginator.get_page(page)
-    print("article total-- ", total_article)
     context = {
         'posts': total_article,
     }
@@ -44,13 +43,25 @@ def getsingle(request, id):
     post = get_object_or_404(article, pk=id)
     first = article.objects.first()
     last = article.objects.last()
-    print('last id:', last.id)
+    get_comment = Comment.objects.filter(post=id)
     related = article.objects.filter(category=post.category).exclude(id=id)[:4]
+    if request.method == 'POST':
+        form = CommentForm(request.POST or None)
+        if form.is_valid:
+            instance = form.save(commit=False)
+            instance.post=post
+            instance.save()
+            messages.success(request, 'Comment added')
+    else:
+        form = CommentForm
+    print(len(get_comment))
     context ={
         'post':post,
         'first':first,
         'last':last,
         'related':related,
+        'comments': get_comment,
+        'form': form,
     }
     return render(request, "single.html", context)
 
@@ -67,26 +78,6 @@ def gettopic(request, name):
     return render(request, 'category.html', context)
 
 
-def getlogin(request):
-    if request.user.is_authenticated:
-        return redirect('index')
-    else:
-        print("not authen")
-        if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            auth = authenticate(request, username=username, password=password)
-            if auth:
-                login(request, auth)
-                return redirect('index')
-            else:
-                messages.add_message(request, messages.ERROR, 'Username or password mismatch.')
-                # return render(request, 'login.html')
-    return render(request, 'login.html')
-
-def getlogout(request):
-    logout(request)
-    return redirect('index')
 
 def getcreate(request):
     if request.user.is_authenticated:
@@ -153,6 +144,30 @@ def getdelete(request, pk):
         return redirect('profile')
     else:
         return redirect('login')
+
+# login, logout, Registration
+
+def getlogin(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+    else:
+        print("not authen")
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            auth = authenticate(request, username=username, password=password)
+            if auth:
+                login(request, auth)
+                return redirect('index')
+            else:
+                messages.add_message(request, messages.ERROR, 'Username or password mismatch.')
+                # return render(request, 'login.html')
+    return render(request, 'login.html')
+
+def getlogout(request):
+    logout(request)
+    return redirect('index')
+
 
 def register(request):
     form = RegisterUser(request.POST or None)

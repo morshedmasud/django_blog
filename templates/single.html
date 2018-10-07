@@ -77,6 +77,30 @@
 		</article>
 		{% endfor %}
 	</div>
+	<div class="single_post_comment container">
+		<h3 class="well container">Comments</h3>
+		{% for comment in comments %}
+			<div class="single_comment">
+				<h4>{{ comment.name }}</h4>
+				<h5 class="text">{{ comment.email }}</h5>
+				<p>{{ comment.post_comment }}</p>
+			</div>
+			{% empty %}
+				<p>Comment not found</p>
+		{% endfor %}
+	</div>
+	<div class="panel panel-default container">
+		<div class="panel-heading">
+			<h3 class="panel-title">Comment</h3>
+		</div>
+		<div class="panel-body">
+			<form action="" method="POST">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
 {% endblock %}
 
 {% block script %}

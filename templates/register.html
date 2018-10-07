@@ -11,11 +11,16 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
     <form action="" method="POST">
+        <h4 class="well">Create Author Account</h4>
         {% csrf_token %}
         {{ form.as_p }}
         <button class="btn btn-primary">Register</button>
     </form>
+</div>
+
+
 {% endblock %}
 
 {% block script %}

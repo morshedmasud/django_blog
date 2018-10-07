@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import author, category, article
+from .models import author, category, article, Comment
 # Register your models here.
 
 
@@ -30,4 +30,11 @@ class categoryModel(admin.ModelAdmin):
 
 admin.site.register(category, categoryModel)
 
+class CommentModel(admin.ModelAdmin):
+    list_display = ['__str__']
+    search_fields = ['__str__']
+    list_per_page = 10
+    class Meta:
+        Model = Comment
 
+admin.site.register(Comment, CommentModel)
