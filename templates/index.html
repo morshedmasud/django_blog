@@ -7,11 +7,11 @@
 {% for post in posts %}
 	<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
 		<figure>
-			<a href="{% url 'single_post' id=post.id %}"><img src="{{ post.image.url }}" class="img-responsive"></a>
+			<a href="{{ post.get_single_url }}"><img src="{{ post.image.url }}" class="img-responsive"></a>
 		</figure>
-		<span class="fh5co-meta"><a href="{% url 'topic' name=post.category.name %}">{{ post.category }}</a></span>
-		<a href="{% url 'single_post' id=post.id %}"><h4 class="fh5co-article-title">{{ post.title }}</h4></a>
-		<h5><a href="{% url 'author' name=post.article_author.name.username %}">{{ post.article_author.name.get_full_name }}</a></h5>
+		<span class="fh5co-meta"><a href="{{ post.get_topic_url }}">{{ post.category }}</a></span>
+		<a href="{{ post.get_single_url }}"><h4 class="fh5co-article-title">{{ post.title }}</h4></a>
+		<h5><a href="{{ post.get_author_url }}">{{ post.article_author.name.get_full_name }}</a></h5>
 		<span class="fh5co-meta fh5co-date">{{ post.posted_on.date }}</span>
 	</article>
 {% endfor %}

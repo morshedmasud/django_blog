@@ -151,7 +151,6 @@ def getlogin(request):
     if request.user.is_authenticated:
         return redirect('index')
     else:
-        print("not authen")
         if request.method == 'POST':
             username = request.POST.get('username')
             password = request.POST.get('password')

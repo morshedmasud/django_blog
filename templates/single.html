@@ -37,10 +37,10 @@
 
 {% block content %}
 	{% if post.id > first.id %}
-		<a href="{% url 'single_post' id=post.id|add:'-1' %}" class="fh5co-post-prev"><span><i class="icon-chevron-left"></i> Prev</span></a>
+		<a href="{% url 'blog:single_post' id=post.id|add:'-1' %}" class="fh5co-post-prev"><span><i class="icon-chevron-left"></i> Prev</span></a>
 	{% endif %}
 	{% if post.id < last.id %}
-		<a href="{% url 'single_post' id=post.id|add:'1' %}" class="fh5co-post-next"><span>Next <i class="icon-chevron-right"></i></span></a>
+		<a href="{% url 'blog:single_post' id=post.id|add:'1' %}" class="fh5co-post-next"><span>Next <i class="icon-chevron-right"></i></span></a>
 	{% endif %}
 	<!-- END #fh5co-header -->
 	<div class="container-fluid">
@@ -49,14 +49,14 @@
 				<figure class="animate-box">
 					<img src="{{ post.image.url }}" alt="Image" class="img-responsive">
 				</figure>
-				<span class="fh5co-meta animate-box"><a href="{% url 'topic' name=post.category.name %}">{{ post.category.name }}</a></span>
+				<span class="fh5co-meta animate-box"><a href="{% url 'blog:topic' name=post.category.name %}">{{ post.category.name }}</a></span>
 				<h2 class="fh5co-article-title animate-box">{{ post.title }}</h2>
 				<span class="fh5co-meta fh5co-date animate-box">{{ post.posted_on }}</span>
 
 				<div class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-left content-article">
 					<div class="row">
 						<div class="col-lg-12 cp-r animate-box">
-							<p>{{ post.body }}</p>
+							<p>{{ post.body | linebreaks }}</p>
 						</div>
 					</div>
 				</div>
@@ -68,8 +68,8 @@
 		{% for r in related %}
 		<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
 			<figure class="animate-box">
-				<a href="{% url 'single_post' id=r.id %}"><img src="{{ r.image.url }}" class="img-responsive"></a>
-				<a href="{% url 'single_post' id=r.id %}"><h3>{{ r.title }}</h3></a>
+				<a href="{% url 'blog:single_post' id=r.id %}"><img src="{{ r.image.url }}" class="img-responsive"></a>
+				<a href="{% url 'blog:single_post' id=r.id %}"><h3>{{ r.title }}</h3></a>
 				<div class="col-lg-12 cp-r animate-box">
 					<p>{{ r.body|truncatewords:10 }}</p>
 				</div>
