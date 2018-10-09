@@ -21,7 +21,7 @@ Author
 {% block profile %}
 	<div class="fh5co-bio">
 		<figure>
-			<img src="{{ auth.profile_pic.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+			<img src="{{ auth.profile_pic.url }}"  src="IMG" class="img-responsive">
 		</figure>
 		<h3 class="heading">About Me</h3>
 		<h2>{{ auth.name.get_full_name }}</h2>
@@ -42,7 +42,7 @@ Author
 {% for post in posts%}
 <article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
 	<figure>
-		<a href="{% url 'blog:single_post' id=post.id %}"><img src="{{ post.image.url }}" alt="Image" class="img-responsive"></a>
+		<a href="{% url 'blog:single_post' id=post.id %}"><img src="{{ post.image.url }}" alt="{% static 'image/person1.jpg' %}" class="img-responsive"></a>
 	</figure>
 	<span class="fh5co-meta"><a href="{% url 'blog:topic' name=post.category %}">{{ post.category }}</a></span>
 	<h2 class="{% url 'blog:single_post' id=post.id %}"><a href="#">{{ post.title }}</a></h2>

@@ -56,7 +56,6 @@ def getsingle(request, id):
             messages.success(request, 'Comment added')
     else:
         form = CommentForm
-    print(len(get_comment))
     context ={
         'post':post,
         'first':first,
