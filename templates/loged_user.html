@@ -49,7 +49,7 @@
     </div>
     {% endif %}
     <div class="container">
-            <a href="{% url 'create'%}" class="btn btn-success pull pull-right">Add new article</a>
+            <a href="{% url 'blog:create'%}" class="btn btn-success pull pull-right">Add new article</a>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -62,8 +62,8 @@
             {% for post in posts %}
                 <tr>
                     <td>{{ post.title }}</td>
-                    <td>{{ post.posted_on }}</td>
-                    <td><a href="{% url 'update' pk=post.id %}" class="btn btn-primary">Edit</a><a href="{% url 'delete' pk=post.id %}" class="btn btn-primary">Delete</a></td>
+                    <td>{{ post.update_on }}</td>
+                    <td><a href="{% url 'blog:update' pk=post.id %}" class="btn btn-primary">Edit</a><a href="{% url 'blog:delete' pk=post.id %}" class="btn btn-primary">Delete</a></td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -7,6 +7,8 @@ from django.db.models import Q
 from .forms import ArticleForm, RegisterUser, CreateAuthor, CommentForm
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse
+
 
 # Create your views here.
 
@@ -82,18 +84,17 @@ def gettopic(request, name):
 def getcreate(request):
     if request.user.is_authenticated:
         u = get_object_or_404(author, name=request.user.id)
-        print(u, '---------')
         if request.method == 'POST':
             form = ArticleForm(request.POST, request.FILES)
             instance = form.save(commit=False)
             instance.article_author=u
             instance.save()
             messages.info(request, "New Post created")
-            return redirect('profile')
+            return redirect('blog:profile')
         form = ArticleForm
         return render(request, 'create.html', {'form': form})
     else:
-        return redirect('login')
+        return redirect('blog:login')
 
 
 def getprofile(request):
@@ -114,10 +115,10 @@ def getprofile(request):
                 instance = form.save(commit=False)
                 instance.name = user
                 instance.save()
-                return redirect('profile')
+                return redirect('blog:profile')
             return render(request, 'createauthor.html', {'form':form})
     else:
-        return redirect('login')
+        return redirect('blog:login')
 
 
 def getupdate(request, pk):
@@ -127,13 +128,13 @@ def getupdate(request, pk):
             form = ArticleForm(request.POST, request.FILES, instance=post)
             form.save()
             messages.success(request, 'Article updated successfully')
-            return redirect('profile')
+            return redirect('blog:profile')
         else:
             form = ArticleForm(instance=post)
             context = {'form': form}
             return render(request, 'create.html', context)
     else:
-        return redirect('login')
+        return redirect('blog:login')
 
 
 def getdelete(request, pk):
@@ -141,15 +142,15 @@ def getdelete(request, pk):
         post = get_object_or_404(article, id=pk)
         post.delete()
         messages.warning(request, "Article is deleted.")
-        return redirect('profile')
+        return redirect('blog:profile')
     else:
-        return redirect('login')
+        return redirect('blog:login')
 
 # login, logout, Registration
 
 def getlogin(request):
     if request.user.is_authenticated:
-        return redirect('index')
+        return redirect('blog:index')
     else:
         if request.method == 'POST':
             username = request.POST.get('username')
@@ -157,7 +158,7 @@ def getlogin(request):
             auth = authenticate(request, username=username, password=password)
             if auth:
                 login(request, auth)
-                return redirect('index')
+                return redirect('blog:index')
             else:
                 messages.add_message(request, messages.ERROR, 'Username or password mismatch.')
                 # return render(request, 'login.html')
@@ -165,7 +166,7 @@ def getlogin(request):
 
 def getlogout(request):
     logout(request)
-    return redirect('index')
+    return redirect('blog:index')
 
 
 def register(request):
@@ -174,7 +175,7 @@ def register(request):
         instance = form.save(commit=False)
         instance.save()
         messages.success(request, "Registration successfully completed")
-        return redirect('login')
+        return redirect('blog:login')
     content = {
         'form': form,
     }
