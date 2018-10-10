@@ -85,6 +85,7 @@
 				<h3 class="heading">Menu</h3>
 				<ul>
 					<li><a href="{% url 'blog:index' %}">Mnuworld</a></li>
+					<li><a href="{% url 'blog:category' %}">Category</a></li>
 					{% if request.user.is_authenticated %}
 						<li><a href="{% url 'blog:profile' %}">Profile</a></li>
 						<li><a href="{% url 'blog:logout' %}">Logout</a></li>

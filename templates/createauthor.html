@@ -11,11 +11,14 @@ CreateAuthor
 {% endblock %}
 
 {% block content %}
-    <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <button class="btn btn-primary">Create Author</button>
-    </form>
+    <div class="container">
+        <h3>Sorry you are not authorized person. You can authorized throughout create the below form.</h3>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button class="btn btn-primary">Create Author</button>
+        </form>
+    </div>
 {% endblock %}
 
 {% block script %}

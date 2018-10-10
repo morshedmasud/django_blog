@@ -19,19 +19,31 @@ All topic
     </div>
 {% endif %}
 <div class="container">
-    <a href="{% url 'blog:createCategory' %}" class="btn btn-success pull pull-right">Add new category</a>
+    {% if request.user.is_authenticated %}
+        {% if request.user.is_staff or request.user.is_superuser %}
+            <a href="{% url 'blog:createCategory' %}" class="btn btn-success pull pull-right">Add new category</a>
+        {% endif%}
+    {% endif %}
     <table class="table table-striped">
         <thead>
         <tr>
             <td>Category</td>
-            <td>Action</td>
+            {% if request.user.is_authenticated %}
+                {% if request.user.is_staff or request.user.is_superuser %}
+                    <td>Action</td>
+                {% endif%}
+            {% endif %}
         </tr>
         </thead>
         <tbody>
         {% for category in all_category %}
             <tr>
                 <td><a href="{% url 'blog:topic' name=category.name %}">{{ category.name }}</a></td>
-                <td><a href="{% url 'blog:updateCategory' category.pk %}" class="btn btn-primary">Edit</a><a href="{% url 'blog:deleteCategory' category.pk %}" class="btn btn-primary">Delete</a></td>
+                {% if request.user.is_authenticated %}
+                    {% if request.user.is_staff or request.user.is_superuser %}
+                        <td><a href="{% url 'blog:updateCategory' category.pk %}" class="btn btn-primary">Edit</a><a href="{% url 'blog:deleteCategory' category.pk %}" class="btn btn-primary">Delete</a></td>
+                    {% endif%}
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
