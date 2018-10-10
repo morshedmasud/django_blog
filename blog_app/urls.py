@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 app_name="blog_app"
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.index.as_view(), name='index'),
     path('author/<name>', views.getauthor, name="author"),
     path('article/<int:id>', views.getsingle, name='single_post'),
     path('topic/<name>', views.gettopic, name='topic'),

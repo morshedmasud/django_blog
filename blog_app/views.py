@@ -8,25 +8,43 @@ from .forms import ArticleForm, RegisterUser, CreateAuthor, CommentForm, Categor
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
+from django.views import View
 
 
 # Create your views here.
 
-def index(request):
-    posts = article.objects.all()
-    search = request.GET.get('q')
-    if search:
-        posts = posts.filter(
-            Q(title__icontains=search) |
-            Q(body__icontains=search)
-        )
-    paginator = Paginator(posts, 8) # Show 8 contacts per page
-    page = request.GET.get('page')
-    total_article = paginator.get_page(page)
-    context = {
-        'posts': total_article,
-    }
-    return render(request, "index.html", context)
+class index(View):
+    def get(self, request):
+        posts = article.objects.all()
+        search = request.GET.get('q')
+        if search:
+            posts = posts.filter(
+                Q(title__icontains=search) |
+                Q(body__icontains=search)
+            )
+        paginator = Paginator(posts, 8) # Show 8 contacts per page
+        page = request.GET.get('page')
+        total_article = paginator.get_page(page)
+        context = {
+            'posts': total_article,
+        }
+        return render(request, "index.html", context)
+
+# def index(request):
+#     posts = article.objects.all()
+#     search = request.GET.get('q')
+#     if search:
+#         posts = posts.filter(
+#             Q(title__icontains=search) |
+#             Q(body__icontains=search)
+#         )
+#     paginator = Paginator(posts, 8) # Show 8 contacts per page
+#     page = request.GET.get('page')
+#     total_article = paginator.get_page(page)
+#     context = {
+#         'posts': total_article,
+#     }
+#     return render(request, "index.html", context)
 
 def getauthor(request, name):
     post_author = get_object_or_404(User, username=name)
