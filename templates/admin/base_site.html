@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrastyle %}
+    <style>
+        div#header {
+            background: rgb(6, 51, 6);
+        }
+    </style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Mnuworld Administration</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
