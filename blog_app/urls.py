@@ -16,6 +16,10 @@ urlpatterns = [
     path('update/<int:pk>', views.getupdate, name='update'),
     path('delete/<int:pk>', views.getdelete, name='delete'),
     path('register/', views.register, name='register'),
+    path('category/', views.getcategory, name='category'),
+    path('createCategory/', views.createCategory, name='createCategory'),
+    path('updateCategory/<pk>', views.updateCategory, name='updateCategory'),
+    path('deleteCategory/<int:pk>', views.deleteCategory, name='deleteCategory'),
 ]
 
 # if settings.DEBUG:

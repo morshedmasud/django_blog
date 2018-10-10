@@ -1,5 +1,5 @@
 from django import forms
-from .models import article, author, Comment
+from .models import article, author, Comment, category
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -44,3 +44,9 @@ class CommentForm(forms.ModelForm):
             'email',
             'post_comment'
         ]
+
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = category
+        fields = "__all__"

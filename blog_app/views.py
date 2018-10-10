@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
-from .forms import ArticleForm, RegisterUser, CreateAuthor, CommentForm
+from .forms import ArticleForm, RegisterUser, CreateAuthor, CommentForm, CategoryForm
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
@@ -76,8 +76,7 @@ def gettopic(request, name):
         'posts':total_article,
         'category':cat,
     }
-    return render(request, 'category.html', context)
-
+    return render(request, 'topic.html', context)
 
 
 def getcreate(request):
@@ -95,6 +94,48 @@ def getcreate(request):
     else:
         return redirect('blog:login')
 
+
+def getcategory(request):
+    query = category.objects.all()
+    content = {
+        'all_category': query,
+    }
+    return render(request, 'category.html', content)
+
+def createCategory(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        instance = form.save(commit=False)
+        instance.save()
+        messages.success(request, 'New Category Added')
+        return redirect('blog:category')
+    form = CategoryForm
+    return render(request, 'createCategory.html', {'form': form})
+
+def deleteCategory(request, pk):
+    print(pk)
+    if request.user.is_authenticated:
+        topic = get_object_or_404(category, id=pk)
+        print(topic)
+        topic.delete()
+        messages.warning(request, "Category Deleted")
+        return redirect('blog:category')
+    else:
+        return redirect('blog:login')
+
+def updateCategory(request, pk):
+    if request.user.is_authenticated:
+        topic = get_object_or_404(category, id=pk)
+        if request.method == 'POST':
+            form = CategoryForm(request.POST, instance=topic)
+            form.save()
+            messages.info(request, "Category updated")
+            return redirect('blog:category')
+        else:
+            form = CategoryForm(instance=topic)
+            return render(request, 'createCategory.html', {'form': form})
+    else:
+        return redirect('blog:login')
 
 def getprofile(request):
     if request.user.is_authenticated:
@@ -144,6 +185,10 @@ def getdelete(request, pk):
         return redirect('blog:profile')
     else:
         return redirect('blog:login')
+
+
+
+
 
 # login, logout, Registration
 
