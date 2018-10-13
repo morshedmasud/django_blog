@@ -121,4 +121,4 @@ media/*
 Pipfile.lock
 
 # staticfiels!
-staticfiels/
+staticfiles/*
