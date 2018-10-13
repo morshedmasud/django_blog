@@ -14,17 +14,33 @@ class ArticleForm(forms.ModelForm):
             'category'
         ]
 
+
 class RegisterUser(UserCreationForm):
+    email = forms.EmailField(max_length=200, help_text='Required')
+    password1 = forms.CharField(label="Password",widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Confirm Password",widget=forms.PasswordInput)
+
     class Meta:
         model = User
-        fields = [
-            'first_name',
-            'last_name',
-            'email',
-            'username',
-            'password1',
-            'password2'
-        ]
+        fields = ('username','first_name','last_name','email')
+
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password1'] != cd['password2']:
+            raise forms.ValidationError("Password didn't match")
+        else:
+            return cd['password2']
+
+    # class Meta:
+    #     model = User
+    #     fields = [
+    #         'first_name',
+    #         'last_name',
+    #         'email',
+    #         'username',
+    #         'password1',
+    #         'password2'
+    #     ]
 
 
 class CreateAuthor(forms.ModelForm):

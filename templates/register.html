@@ -13,13 +13,31 @@
 {% block content %}
 <div class="container">
     <form action="" method="POST">
-        <h4 class="well">Create Author Account</h4>
         {% csrf_token %}
+        <h4 class="well">Sign up</h4>
         {{ form.as_p }}
         <button class="btn btn-primary">Register</button>
     </form>
 </div>
 
+<!-- <h2>Sign up</h2>
+
+<form method="post">
+    {% csrf_token %}
+      {% for field in form %}
+
+
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.help_text %}
+          <small style="display: none">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endfor %}
+    <button type="submit">Sign up</button>
+</form> -->
 
 {% endblock %}
 

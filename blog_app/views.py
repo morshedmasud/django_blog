@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
+from django.shortcuts import render, Http404, get_object_or_404, redirect, HttpResponse
 from .models import author, category, article, Comment
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -9,6 +9,14 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
 from django.views import View
+# for mail
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.conf import settings
+from django.core.mail import EmailMessage, send_mail
+from .token import activation_token
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 
 # Create your views here.
@@ -208,6 +216,12 @@ def getdelete(request, pk):
 
 
 
+
+
+
+
+
+
 # login, logout, Registration
 
 def getlogin(request):
@@ -232,13 +246,66 @@ def getlogout(request):
 
 
 def register(request):
-    form = RegisterUser(request.POST or None)
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-        messages.success(request, "Registration successfully completed")
-        return redirect('blog:login')
-    content = {
-        'form': form,
-    }
-    return render(request, 'register.html', content)
+    if request.method == 'POST':
+        form = RegisterUser(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            current_site = get_current_site(request)
+            print('current site--', current_site, current_site.domain)
+            mail_subject = "Activate your blog account."
+            message = render_to_string('confirm_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.id)).decode(),
+                'token': activation_token.make_token(user),
+            })
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(mail_subject, message, to=[to_email])
+            email.send()
+            return HttpResponse("<h2>Thanks for your registration. A confirmation link was sent to your email</h2>")
+    else:
+        form = RegisterUser()
+    return render(request, 'register.html', {'form': form})
+
+
+    # form = RegisterUser(request.POST or None)
+    # if form.is_valid():
+    #     instance = form.save(commit=False)
+    #     instance.is_active=False
+    #     instance.save()
+    #     site=get_current_site(request)
+    #     mail_subject = "Confirmation message for blog account"
+    #     message = render_to_string('confirm_email.html', {
+    #         'user':instance,
+    #         'domain':site.domain,
+    #         'uid':instance.id,
+    #         'token': activation_token.make_token(instance)
+    #     })
+    #     to_email=form.cleaned_data.get('email')
+    #     to_list = [to_email]
+    #     from_email = settings.EMAIL_HOST_USER
+    #     print(from_email)
+    #     send_mail(mail_subject, message, from_email, to_list, fail_silently=False)
+    #     return HttpResponse("<h2>Thanks for your registration. A confirmation link was sent to your email</h2>")
+
+    # content = {
+    #     'form': form,
+    # }
+    # return render(request, 'register.html', content)
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        print(uid, 'uid decode')
+        user = User.objects.get(id=uid)
+        print(user)
+    except(TypeError, ValueError, OverflowError):
+        user = None
+    if user is not None and activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        return HttpResponse("<h3>Thank you for your email confirmation. Now you can login your account. <a href='/login'>login</a></h3>")
+    else:
+        return HttpResponse("<h3>Activation link is invalid!</h3>")

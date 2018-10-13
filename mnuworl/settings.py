@@ -142,7 +142,13 @@ MESSAGE_TAGS = {
     messages.DEBUG: 'alert alert-info',
 }
 
-
-
 # Activate Dhango-Heroku
 django_heroku.settings(locals())
+
+
+# Gmail confirmation
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'unknownhuman7894@gmail.com'
+EMAIL_HOST_PASSWORD = '618227771582'

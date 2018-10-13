@@ -20,6 +20,8 @@ urlpatterns = [
     path('createCategory/', views.createCategory, name='createCategory'),
     path('updateCategory/<pk>', views.updateCategory, name='updateCategory'),
     path('deleteCategory/<int:pk>', views.deleteCategory, name='deleteCategory'),
+    #account confirmation
+    path('activate/<uidb64>/<token>/', views.activate, name='activate')
 ]
 
 # if settings.DEBUG:
