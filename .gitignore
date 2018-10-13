@@ -117,7 +117,8 @@ media/*
 # .DS_STORE
 .DS_Store
 
-
 # Pipfile.lock
 Pipfile.lock
 
+# staticfiels!
+staticfiels/

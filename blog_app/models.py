@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+
 # Create your models here.
 
 class author(models.Model):
@@ -22,7 +25,7 @@ class category(models.Model):
 class article(models.Model):
     article_author = models.ForeignKey(author, on_delete=models.CASCADE)
     title=models.CharField(max_length=200)
-    body=models.TextField()
+    body= RichTextUploadingField()
     image = models.FileField(upload_to = 'product_image/')
     category = models.ForeignKey(category, on_delete=models.CASCADE)
     posted_on = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -46,7 +49,7 @@ class Comment(models.Model):
     post = models.ForeignKey(article, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=200)
-    post_comment = models.TextField()
+    post_comment = RichTextUploadingField()
 
     def __str__(self):
         return self.post.title
