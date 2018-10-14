@@ -9,6 +9,10 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
 from django.views import View
+from .require import render_to_pdf
+from django.template.loader import get_template
+import datetime
+
 # for mail
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -309,3 +313,31 @@ def activate(request, uidb64, token):
         return HttpResponse("<h3>Thank you for your email confirmation. Now you can login your account. <a href='/login'>login</a></h3>")
     else:
         return HttpResponse("<h3>Activation link is invalid!</h3>")
+
+
+# html to pdf
+
+class Pdf(View):
+    def get(self, request, id):
+        try:
+            query = get_object_or_404(article, id=id)
+        except:
+            Http404('Content not found!!')
+        context = {
+            'article': query,
+        }
+        pdf = render_to_pdf('pdf.html', context)
+        if pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            # pdf name generate with date
+            date = datetime.date.today()
+            tmpName = 'pdf'.split('.')[0]
+            pdfName = tmpName+'-'+str(date)+'.pdf'
+            content="inline; filename=%s" %(pdfName)
+            download = request.GET.get('download')
+            if download:
+                content = "attachment; filename=%s" %(pdfName)
+            response['Content-Disposition']=content
+            return response
+        return HttpResponse("NOT found")
+

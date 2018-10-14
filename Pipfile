@@ -9,8 +9,12 @@ django-heroku = "*"
 gunicorn = "*"
 django-ckeditor = "*"
 pillow = "*"
+"xhtml2pdf" = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true

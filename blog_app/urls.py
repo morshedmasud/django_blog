@@ -21,7 +21,9 @@ urlpatterns = [
     path('updateCategory/<pk>', views.updateCategory, name='updateCategory'),
     path('deleteCategory/<int:pk>', views.deleteCategory, name='deleteCategory'),
     #account confirmation
-    path('activate/<uidb64>/<token>/', views.activate, name='activate')
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
+    # html to pdf
+    path('pdf/<int:id>', views.Pdf.as_view(), name='pdf'),
 ]
 
 # if settings.DEBUG:

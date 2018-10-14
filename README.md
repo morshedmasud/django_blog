@@ -23,9 +23,9 @@ git clone git@github.com:morshedmasud/django_blog.git
 pip install pipenv
 ```
 
-3. Now run and install django by pipenv
+3. Now install all pakage using belo 
 ```
-pipenv install django
+pipenv install
 pipenv shell # Active pipenv
 ```
 4. Apply database base migrations and migrate

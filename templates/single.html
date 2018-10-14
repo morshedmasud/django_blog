@@ -64,6 +64,7 @@
 		</div>
 	</div>
 	<div class="container">
+		<a href="{% url 'blog:pdf' id=post.id %}" target="_blank">Save as pdf</a>
 		<h3 class="well">Related Post</h3>
 		{% for r in related %}
 		<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
@@ -83,7 +84,7 @@
 			<div class="single_comment">
 				<h4>{{ comment.name }}</h4>
 				<h5 class="text">{{ comment.email }}</h5>
-				<p>{{ comment.post_comment }}</p>
+				<p>{{ comment.post_comment|safe }}</p>
 			</div>
 			{% empty %}
 				<p>Comment not found</p>
