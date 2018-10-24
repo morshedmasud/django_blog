@@ -56,7 +56,9 @@
 				<div class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-left content-article">
 					<div class="row">
 						<div class="col-lg-12 cp-r animate-box">
-							<p>{{ post.video|safe }}</p>
+							{% if post.video %}
+								{{ post.video|safe }}
+							{% endif %}
 							<p>{{ post.body|safe|linebreaks }}</p>
 						</div>
 					</div>
