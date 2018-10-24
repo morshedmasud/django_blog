@@ -15,7 +15,7 @@ class articleModel(admin.ModelAdmin):
     list_display = ["__str__", "posted_on"]
     search_fields=["__str__", "title"]
     list_filter = ["posted_on", "category"]
-    list_per_page= 10
+    list_per_page= 15
     class Meta:
         Model=article
 

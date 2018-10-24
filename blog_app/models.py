@@ -25,6 +25,7 @@ class category(models.Model):
 class article(models.Model):
     article_author = models.ForeignKey(author, on_delete=models.CASCADE)
     title=models.CharField(max_length=200)
+    video = models.TextField(null=True, blank=True)
     body= RichTextUploadingField()
     image = models.FileField(upload_to = 'product_image/')
     category = models.ForeignKey(category, on_delete=models.CASCADE)

@@ -9,6 +9,7 @@ class ArticleForm(forms.ModelForm):
         model = article
         fields = [
             'title',
+            'video',
             'body',
             'image',
             'category'

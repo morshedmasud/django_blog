@@ -16,9 +16,9 @@
 	</article>
 {% endfor %}
 
-<div class="container">
+<nav class="container">
 	{% if posts.has_other_pages %}
-		<ul class="pagination well">
+		<ul class="pagination justify-content-center">
 			{% if posts.has_previous %}
 				<li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a></li>
 			{% else %}
@@ -38,7 +38,8 @@
 			{% endif %}
 		</ul>
 	{% endif %}
-</div>
+</nav>
+
 
 <!-- <div class="container">
 	<div class="pagination">
