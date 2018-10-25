@@ -11,6 +11,7 @@ django-ckeditor = "*"
 pillow = "*"
 "xhtml2pdf" = "*"
 "psycopg2-binary" = "*"
+whitenoise = "*"
 
 [dev-packages]
 
