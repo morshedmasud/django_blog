@@ -11,15 +11,45 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="container">
-<div class="row">
+    <div class="row">
+        <div class="col col-md-20">
+            <form action="" method="POST">
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <p {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="Username">Username</label>
+                    <input type="text" name="username" placeholder="username" class="form-control from-control-lg from-control-sm">
+                </div>
+                <div class="form-group">
+                    <label for="Password">Password</label>
+                    <input type="password" name="password" placeholder="password" class="form-control from-control-lg from-control-sm">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="submit" class="btn btn-success btn-lg btn-block">
+                </div>
+            </form>
+            <p>Don't have an account?</p>
+            <a href="{% url 'blog:register' %}" class="btn btn-primary">Signup</a>
+        </div>
+    </div>
+</div>
+<!-- <div class="container ">
+<div>
     <div class="col-md-20 col-md-offset-3">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Please login to your account</h3>
             </div>
             <div class="panel-body">
-                <form action="" method="POST">
+                <form action="" method="POST" >
                         {% if messages %}
                         <div class="messages">
                             {% for message in messages %}
@@ -45,7 +75,7 @@
     <a href="{% url 'blog:register' %}" class="btn btn-primary">Signup</a>
 </div>
 
-</div>
+</div> -->
 
 {% endblock %}
 

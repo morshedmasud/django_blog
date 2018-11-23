@@ -59,7 +59,18 @@
 							{% if post.video %}
 								{{ post.video|safe }}
 							{% endif %}
-							<p>{{ post.body|safe|linebreaks }}</p>
+              <p>{{ post.body|safe|linebreaks }}</p>
+              <p class="text-info">{{ total_likes }} Like{{ total_likes|pluralize }}</p>
+              {% if user.is_authenticated %}
+                <form action="{% url 'blog:like_post' %}" method="POST">
+                  {% csrf_token %}
+                  {% if is_liked %}
+                    <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger">Dislike</button>
+                  {% else %}
+                    <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-success">Like</button>
+                  {% endif %}
+                </form>
+              {% endif %}
 						</div>
 					</div>
 				</div>
@@ -74,7 +85,7 @@
 			<figure class="animate-box">
 				<a href="{% url 'blog:single_post' id=r.id %}"><img src="{{ r.image.url }}" class="img-responsive"></a>
 				<a href="{% url 'blog:single_post' id=r.id %}"><h3>{{ r.title }}</h3></a>
-				<div class="col-lg-12 cp-r animate-box">
+				<div class="col-lg-12 cp-r animate-box text-left">
 					<p>{{ r.body|truncatewords:10 }}</p>
 				</div>
 			</figure>
@@ -100,7 +111,7 @@
 		<div class="panel-body">
 			<form action="" method="POST">
 				{% csrf_token %}
-					{{ form.media }}
+				{{ form.media }}
 				{{ form.as_p }}
 				<button class="btn btn-primary">Submit</button>
 			</form>

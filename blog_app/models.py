@@ -27,6 +27,7 @@ class article(models.Model):
     title=models.CharField(max_length=200)
     video = models.TextField(null=True, blank=True)
     body= RichTextUploadingField()
+    likes = models.ManyToManyField(User, related_name='likes',blank=True)
     image = models.FileField(upload_to = 'product_image/')
     category = models.ForeignKey(category, on_delete=models.CASCADE)
     posted_on = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -37,6 +38,9 @@ class article(models.Model):
 
     def get_single_url(self):
         return reverse('blog:single_post', kwargs={"id":self.pk})
+
+    def total_likes(self):
+        return self.likes.count()
 
     def get_author_url(self):
         return reverse('blog:author', kwargs={"name":self.article_author})

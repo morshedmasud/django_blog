@@ -24,6 +24,7 @@ urlpatterns = [
     path('activate/<uidb64>/<token>/', views.activate, name='activate'),
     # html to pdf
     path('pdf/<int:id>', views.Pdf.as_view(), name='pdf'),
+    path('likes/', views.like_post, name='like_post')
 ]
 
 # if settings.DEBUG:

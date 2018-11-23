@@ -1,4 +1,4 @@
-from django.shortcuts import render, Http404, get_object_or_404, redirect, HttpResponse
+from django.shortcuts import render, Http404, get_object_or_404, redirect, HttpResponse, HttpResponseRedirect
 from .models import author, category, article, Comment
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -86,8 +86,15 @@ def getsingle(request, id):
             messages.success(request, 'Comment added')
     else:
         form = CommentForm
+
+    is_liked = False
+    if post.likes.filter(id=request.user.id).exists():
+        is_liked = True
+
     context ={
         'post':post,
+        'is_liked': is_liked,
+        'total_likes': post.total_likes(),
         'first':first,
         'last':last,
         'related':related,
@@ -95,6 +102,24 @@ def getsingle(request, id):
         'form': form,
     }
     return render(request, "single.html", context)
+
+
+
+def like_post(request):
+    post = get_object_or_404(article, id=request.POST.get('post_id'))
+    is_liked = False
+    if post.likes.filter(id=request.user.id).exists():
+    # if article.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+        is_liked = False
+    else:
+        post.likes.add(request.user)
+        is_liked = True
+
+    post_id = request.POST.get("post_id")
+    return redirect("blog:single_post", post_id)
+
+
 
 def gettopic(request, name):
     cat = get_object_or_404(category, name=name)
@@ -215,13 +240,6 @@ def getdelete(request, pk):
         return redirect('blog:profile')
     else:
         return redirect('blog:login')
-
-
-
-
-
-
-
 
 
 
