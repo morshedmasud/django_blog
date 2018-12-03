@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc7799da-89bc-4b51-82df-0588c3c41e09" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog_app/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/single.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/single.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,14 +20,17 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="Procfile" value="1" />
+          <entry key="gitignore" value="1" />
           <entry key="html" value="1" />
-          <entry key="py" value="1" />
+          <entry key="py" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="1" />
-          <entry key="Python" value="1" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="Python" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -51,16 +49,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog_app/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="490">
-              <caret line="75" selection-start-line="75" selection-end-line="75" />
+            <state relative-caret-position="112">
+              <caret line="54" selection-start-line="54" selection-end-line="54" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1782" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mnuworl/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2035">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="e#308#317#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Procfile">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -112,12 +134,7 @@
             <path>
               <item name="django_blog" type="b2602c69:ProjectViewProjectNode" />
               <item name="django_blog" type="462c0819:PsiDirectoryNode" />
-              <item name="blog_app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_blog" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_blog" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="mnuworl" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -186,7 +203,7 @@
     <frame x="0" y="23" width="960" height="982" extended-state="0" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.052287582" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21895425" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -226,13 +243,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog_app/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        <state relative-caret-position="112">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1782" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mnuworl/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2035">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="e#308#317#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Procfile">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

@@ -12,6 +12,7 @@ pillow = "*"
 "xhtml2pdf" = "*"
 "psycopg2-binary" = "*"
 whitenoise = "*"
+heroku = "*"
 
 [dev-packages]
 pylint = "*"
