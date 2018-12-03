@@ -54,6 +54,7 @@ class CreateAuthor(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+
     class Meta:
         model = Comment
         fields = [
@@ -61,6 +62,11 @@ class CommentForm(forms.ModelForm):
             'email',
             'post_comment'
         ]
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.TextInput(attrs={"class": 'form-control'}),
+            'post_comment': forms.Textarea(attrs={"class": 'form-control'})
+        }
 
 
 class CategoryForm(forms.ModelForm):

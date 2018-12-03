@@ -54,7 +54,8 @@ class Comment(models.Model):
     post = models.ForeignKey(article, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=200)
-    post_comment = RichTextUploadingField()
+    # post_comment = RichTextUploadingField()
+    post_comment = models.TextField()
 
     def __str__(self):
         return self.post.title
