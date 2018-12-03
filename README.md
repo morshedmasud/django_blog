@@ -1,7 +1,7 @@
 # django_blog
 Blog using django
 
-## [Demo](http://morshed-bd.herokuapp.com/)
+## [Demo](http://mnuworld.herokuapp.com/)
 
 ## Technology used
 1. Django

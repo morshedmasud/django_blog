@@ -118,7 +118,10 @@ media/*
 .DS_Store
 
 # Pipfile.lock
-# Pipfile.lock
+Pipfile.lock
 
 # staticfiels!
 staticfiles/*
+
+
+.idea
