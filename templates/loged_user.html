@@ -1,24 +1,26 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
 {% endblock %}
 
 {% block stylesheet %}
 <style type="text/css">
-	#fh5co-offcanvas {
-		width: auto;
-	}
-	#fh5co-offcanvas .fh5co-menu, #fh5co-offcanvas .fh5co-bio {
-		width: 350px;
-		padding: 50px;
+    #fh5co-offcanvas {
+        width: auto;
+    }
+
+    #fh5co-offcanvas .fh5co-menu,
+    #fh5co-offcanvas .fh5co-bio {
+        width: 350px;
+        padding: 50px;
     }
 
     .alert {
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-    color: #3c763d;
-    height: 50px;
-    margin-top: 200px;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+        color: #3c763d;
+        height: 50px;
+        margin-top: 200px;
     }
 </style>
 {% endblock %}
@@ -26,7 +28,12 @@
 {% block profile %}
 <div class="fh5co-bio">
     <figure>
+        <!-- <img src="{{ user.profile_pic.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive"> -->
+        {% if user.profile_pic.url %}
         <img src="{{ user.profile_pic.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+        {% else %}
+        <img src="{% static 'images/person1.jpg' %}" alt="" class="img-responsive">
+        {% endif %}
     </figure>
     <h3 class="heading">About Me</h3>
     <h2>{{ user.name.get_full_name }}</h2>
@@ -41,34 +48,35 @@
 {% endblock %}
 
 {% block content %}
-    {% if messages %}
-    <div class="messages">
+{% if messages %}
+<div class="messages">
     {% for message in messages %}
-        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-        {% endfor %}
-    </div>
-    {% endif %}
-    <div class="container">
-            <a href="{% url 'blog:create'%}" class="btn btn-success pull pull-right">Add new article</a>
-        <table class="table table-striped">
-            <thead>
+    <p {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+<div class="container">
+    <a href="{% url 'blog:create'%}" class="btn btn-success pull pull-right">Add new article</a>
+    <table class="table table-striped">
+        <thead>
             <tr>
                 <td>Title</td>
                 <td>Posted On</td>
                 <td>Action</td>
             </tr>
-            </thead>
-            <tbody>
+        </thead>
+        <tbody>
             {% for post in posts %}
-                <tr>
-                    <td>{{ post.title }}</td>
-                    <td>{{ post.update_on }}</td>
-                    <td><a href="{% url 'blog:update' pk=post.id %}" class="btn btn-primary">Edit</a><a href="{% url 'blog:delete' pk=post.id %}" class="btn btn-primary">Delete</a></td>
-                </tr>
+            <tr>
+                <td>{{ post.title }}</td>
+                <td>{{ post.update_on }}</td>
+                <td><a href="{% url 'blog:update' pk=post.id %}" class="btn btn-primary">Edit</a><a
+                        href="{% url 'blog:delete' pk=post.id %}" class="btn btn-primary">Delete</a></td>
+            </tr>
             {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>
 {% endblock %}
 
 {% block script %}

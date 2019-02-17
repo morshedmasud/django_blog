@@ -7,7 +7,13 @@
 {% for post in posts %}
 	<article class="col-lg-3 col-md-3 col-sm-4 col-xs-6 col-xxs-12 animate-box">
 		<figure>
-			<a href="{{ post.get_single_url }}"><img src="{{ post.image.url }}" alt="IMG" class="img-responsive"></a>
+			<a href="{{ post.get_single_url }}">
+				{% if post.image.url %}
+				<img src="{{ post.image.url }}"  class="img-responsive">
+				{% else %}
+				<img src="{% static 'images/single_1.jpg' %}" alt="" class="img-responsive">
+				{% endif %}
+			</a>
 		</figure>
 		<span class="fh5co-meta"><a href="{{ post.get_topic_url }}">{{ post.category }}</a></span>
 		<a href="{{ post.get_single_url }}"><h4 class="fh5co-article-title">{{ post.title }}</h4></a>
