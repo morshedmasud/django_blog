@@ -42,21 +42,6 @@ class index(View):
         }
         return render(request, "index.html", context)
 
-# def index(request):
-#     posts = article.objects.all()
-#     search = request.GET.get('q')
-#     if search:
-#         posts = posts.filter(
-#             Q(title__icontains=search) |
-#             Q(body__icontains=search)
-#         )
-#     paginator = Paginator(posts, 8) # Show 8 contacts per page
-#     page = request.GET.get('page')
-#     total_article = paginator.get_page(page)
-#     context = {
-#         'posts': total_article,
-#     }
-#     return render(request, "index.html", context)
 
 def getauthor(request, name):
     post_author = get_object_or_404(User, username=name)
@@ -109,7 +94,6 @@ def like_post(request):
     post = get_object_or_404(article, id=request.POST.get('post_id'))
     is_liked = False
     if post.likes.filter(id=request.user.id).exists():
-    # if article.likes.filter(id=request.user.id).exists():
         post.likes.remove(request.user)
         is_liked = False
     else:
