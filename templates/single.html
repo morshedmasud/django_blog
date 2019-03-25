@@ -53,7 +53,8 @@
 			class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
 			<figure class="animate-box">
 				{% if post.image.url %}
-					<img src="{{ post.image.url }}" class="img-responsive">
+{#					<img src="{{ post.image.url }}" class="img-responsive">#}
+                    <img src="{% static 'images/single_1.jpg' %}" alt="" class="img-responsive">
 				{% else %}
 					<img src="{% static 'images/single_1.jpg' %}" alt="" class="img-responsive">
 				{% endif %}

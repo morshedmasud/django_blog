@@ -9,10 +9,10 @@
 {% for post in posts %}
 <article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
 	<figure>
-		<!-- <a href="{% url 'blog:single_post' id=post.id %}"><img src="{{ post.image.url }}" class="img-responsive"></a> -->
 		<a href="{{ post.get_single_url }}">
 			{% if post.image.url %}
-			<img src="{{ post.image.url }}" class="img-responsive">
+{#			<img src="{{ post.image.url }}" class="img-responsive">#}
+                <img src="{% static 'images/single_1.jpg' %}" alt="" class="img-responsive">
 			{% else %}
 			<img src="{% static 'images/single_1.jpg' %}" alt="" class="img-responsive">
 			{% endif %}
