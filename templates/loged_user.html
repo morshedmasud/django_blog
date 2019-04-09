@@ -28,9 +28,9 @@
 {% block profile %}
 <div class="fh5co-bio">
     <figure>
-        <!-- <img src="{{ user.profile_pic.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive"> -->
+        <img src="{% static 'images/person1.jpg' %}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
         {% if user.profile_pic.url %}
-        <img src="{{ user.profile_pic.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+        <img src="{{ user.profile_pic.url }}" alt="" class="img-responsive">
         {% else %}
         <img src="{% static 'images/person1.jpg' %}" alt="" class="img-responsive">
         {% endif %}
