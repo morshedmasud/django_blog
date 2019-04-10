@@ -4,152 +4,199 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>{% block title %} {% endblock %}</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FREEHTML5.CO" />
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %} {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO"/>
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"/>
+    <meta name="author" content="FREEHTML5.CO"/>
 
-  <!--
-	//////////////////////////////////////////////////////
+    <!--
+      //////////////////////////////////////////////////////
 
-	FREE HTML5 TEMPLATE
-	DESIGNED & DEVELOPED by FREEHTML5.CO
+      FREE HTML5 TEMPLATE
+      DESIGNED & DEVELOPED by FREEHTML5.CO
 
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
+      Website: 		http://freehtml5.co/
+      Email: 			info@freehtml5.co
+      Twitter: 		http://twitter.com/fh5co
+      Facebook: 		https://www.facebook.com/fh5co
 
-	//////////////////////////////////////////////////////
-	 -->
+      //////////////////////////////////////////////////////
+       -->
 
-  	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content=""/>
+    <meta name="twitter:title" content=""/>
+    <meta name="twitter:image" content=""/>
+    <meta name="twitter:url" content=""/>
+    <meta name="twitter:card" content=""/>
 
-	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<link rel="shortcut icon" href="favicon.ico">
-	<!-- Google Fonts -->
-	<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic|Roboto:400,300,700' rel='stylesheet' type='text/css'>
-	<!-- Animate -->
-	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
-	<!-- Icomoon -->
-	<link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic|Roboto:400,300,700'
+          rel='stylesheet' type='text/css'>
+    <!-- Animate -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- Icomoon -->
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-	<style type="text/css">
-		#fh5co-offcanvas {
-			width: auto;
-		}
-		#fh5co-offcanvas .fh5co-menu, #fh5co-offcanvas .fh5co-bio {
-			width: 400px;
-			padding: 50px;
-		}
-	</style>
-	{% block stylesheet %}
+    <style type="text/css">
+        #fh5co-offcanvas {
+            width: auto;
+        }
+
+        #fh5co-offcanvas .fh5co-menu, #fh5co-offcanvas .fh5co-bio {
+            width: 400px;
+            padding: 50px;
+        }
+    </style>
+    {% block stylesheet %}
 
     {% endblock %}
 
 
-	<!-- Modernizr JS -->
-	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
+    <!-- Modernizr JS -->
+    <script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
-	</head>
-	<body>
-	<div id="fh5co-offcanvas">
-		<a href="#" class="fh5co-close-offcanvas js-fh5co-close-offcanvas"><span><i class="icon-cross3"></i> <span>Close</span></span></a>
-        {% block profile %}
+</head>
+<body>
+<div id="fh5co-offcanvas">
+    <a href="#" class="fh5co-close-offcanvas js-fh5co-close-offcanvas"><span><i
+            class="icon-cross3"></i> <span>Close</span></span></a>
+    {% block profile %}
 
-        {% endblock %}
-		<div class="fh5co-menu">
-			<div class="fh5co-box">
-				<h3 class="heading">Menu</h3>
-				<ul>
-					<li><a href="{% url 'blog:index' %}">Mnuworld</a></li>
-					<li><a href="{% url 'blog:category' %}">Category</a></li>
-					{% if request.user.is_authenticated %}
-						<li><a href="{% url 'blog:profile' %}">Profile</a></li>
-						<li><a href="{% url 'blog:logout' %}">Logout</a></li>
-						{% else %}
-						<li><a href="{% url 'blog:login' %}">Login</a></li>
-					{% endif %}
-				</ul>
-			</div>
-			<div class="fh5co-box">
-				<h3 class="heading">Search</h3>
-				<form action="" method="GET">
-					<div class="form-group">
-						<input type="text" name="q" class="form-control" placeholder="Type a keyword" value="{{ request.GET.q }}">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- END #fh5co-offcanvas -->
-	<header id="fh5co-header">
-
-		<div class="container-fluid">
-
-			<div class="row">
-				<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-				<ul class="fh5co-social">
-					<li><a href="#"><i class="icon-twitter"></i></a></li>
-					<li><a href="#"><i class="icon-facebook"></i></a></li>
-					<li><a href="#"><i class="icon-instagram"></i></a></li>
-				</ul>
-				<div class="col-lg-12 col-md-12 text-center">
-					<h1 id="fh5co-logo"><a href="{% url 'blog:index' %}">Mnuworld</a></h1>
-				</div>
-
-			</div>
-
-		</div>
-
-    </header>
-    <div class="container-fluid">
-		<div class="row fh5co-post-entry">
-            {% block content %}
-            {% endblock %}
+    {% endblock %}
+    <div class="fh5co-menu">
+        <div class="fh5co-box">
+            <h3 class="heading">Menu</h3>
+            <ul>
+                <li><a href="{% url 'blog:index' %}">Mnuworld</a></li>
+                <li><a href="{% url 'blog:category' %}">Category</a></li>
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'blog:profile' %}">Profile</a></li>
+                    <li><a href="{% url 'blog:logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'blog:login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="fh5co-box">
+            <h3 class="heading">Search</h3>
+            <form action="" method="GET">
+                <div class="form-group">
+                    <input type="text" name="q" class="form-control" placeholder="Type a keyword"
+                           value="{{ request.GET.q }}">
+                </div>
+            </form>
         </div>
     </div>
-    <footer id="fh5co-footer">
-		<p><small>&copy;2018 Masud Morshed. All Rights Reserverd</p>
-	</footer>
+</div>
+<!-- END #fh5co-offcanvas -->
+<header id="fh5co-header">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+            <ul class="fh5co-social">
+                <li><a href="#"><i class="icon-twitter"></i></a></li>
+                <li><a href="#"><i class="icon-facebook"></i></a></li>
+                <li><a href="#"><i class="icon-instagram"></i></a></li>
+            </ul>
+            <div class="col-lg-12 col-md-12 text-center">
+                <h1 id="fh5co-logo"><a href="{% url 'blog:index' %}">Mnuworld</a></h1>
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+<div class="container-fluid">
+    <div class="row fh5co-post-entry">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+<footer id="fh5co-footer">
+    <p>
+        <small>&copy;2018 Masud Morshed. All Rights Reserverd
+    </p>
+</footer>
 
 
+<!-- jQuery -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<!-- jQuery Easing -->
+<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+<!-- Bootstrap -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- Waypoints -->
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<!-- Main JS -->
+<script src="{% static 'js/main.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+{% block script %}
+{% endblock %}
 
-	<!-- jQuery -->
-	<script src="{% static 'js/jquery.min.js' %}"></script>
-	<!-- jQuery Easing -->
-	<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
-	<!-- Bootstrap -->
-	<script src="{% static 'js/bootstrap.min.js' %}"></script>
-	<!-- Waypoints -->
-	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-	<!-- Main JS -->
-    <script src="{% static 'js/main.js' %}"></script>
-    {% block script %}
-    {% endblock %}
+<script type="text/javascript">
+</script>
 
-	</body>
+<script>
+    $(document).ready(function () {
+        function updateText(btn, newCount, verb){
+            btn.text(newCount + " " + verb)
+        }
+
+        $(".like-btn").click(function (e) {
+            e.preventDefault();
+            var this_ = $(this);
+            var likeurl = this_.attr("data-href");
+            var likeCount = parseInt(this_.attr("data-likes")) | 0;
+            var addLike = likeCount + 1;
+            var removeLike = likeCount - 1;
+            $.ajax({
+                url: likeurl,
+                method: "GET",
+                data: {},
+                success: function (data) {
+                    console.log(data);
+                    var newLikes;
+                    if (data.liked){
+                        {#newLikes = likeCount + 1#}
+                        updateText(this_, addLike, "unlike")
+                    } else {
+                        {#newLikes = likeCount - 1#}
+                        updateText(this_, removeLike, "like")
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    console.log("error")
+                }
+            })
+        })
+    })
+</script>
+
+</body>
 </html>

@@ -20,13 +20,13 @@ urlpatterns = [
     path('createCategory/', views.createCategory, name='createCategory'),
     path('updateCategory/<pk>', views.updateCategory, name='updateCategory'),
     path('deleteCategory/<int:pk>', views.deleteCategory, name='deleteCategory'),
-    #account confirmation
+    # account confirmation
     path('activate/<uidb64>/<token>/', views.activate, name='activate'),
     # html to pdf
     path('pdf/<int:id>', views.Pdf.as_view(), name='pdf'),
-    path('likes/', views.like_post, name='like_post')
-]
 
-# if settings.DEBUG:
-#     urlpatterns+=static(settings.STATIC_URL,  document_root=settings.STATIC_ROOT)
-#     urlpatterns+=static(settings.MEDIA_URL,  document_root=settings.MEDIA_ROOT)
+    # path('article/<int:id>/like/', views.like_post, name='like_post'),
+    path("article/<int:id>/like/", views.PostlikeToggle.as_view(), name='like_post'),
+    path("api/<int:id>/like/", views.PostlikeAPIToggle.as_view(), name='api_like_post'),
+
+]

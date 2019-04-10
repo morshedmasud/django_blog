@@ -48,6 +48,12 @@ class article(models.Model):
     def get_topic_url(self):
         return reverse("blog:topic", kwargs={"name":self.category})
 
+    def get_like_url(self):
+        return reverse('blog:like_post', kwargs={"id":self.pk})
+
+    def get_api_like_url(self):
+        return reverse('blog:api_like_post', kwargs={"id":self.pk})
+
 
 
 class Comment(models.Model):

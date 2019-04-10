@@ -6,150 +6,164 @@
 {% endblock %}
 
 {% block stylesheet %}
-<style type="text/css">
-	#fh5co-offcanvas {
-		width: auto;
-	}
+    <style type="text/css">
+        #fh5co-offcanvas {
+            width: auto;
+        }
 
-	#fh5co-offcanvas .fh5co-menu,
-	#fh5co-offcanvas .fh5co-bio {
-		width: 350px;
-		padding: 50px;
-	}
-</style>
+        #fh5co-offcanvas .fh5co-menu,
+        #fh5co-offcanvas .fh5co-bio {
+            width: 350px;
+            padding: 50px;
+        }
+    </style>
 {% endblock %}
 
 {% block profile %}
-<div class="fh5co-bio">
-	<figure>
-        <img src="{% static 'images/person1.jpg' %}" alt="" class="img-responsive">
+    <div class="fh5co-bio">
+        <figure>
+            <img src="{% static 'images/person1.jpg' %}" alt="" class="img-responsive">
 
-{#		<img src="{{ post.article_author.profile_pic.url }}" alt="" class="img-responsive">#}
-	</figure>
-	<h3 class="heading">About Me</h3>
-	<h2>{{ post.article_author.name.get_full_name }}</h2>
-	<a href="mailto:{{post.article_author.name.email}}">{{ post.article_author.name.email }}</a>
-	<p>{{ post.article_author.details }}</p>
-	<ul class="fh5co-social">
-		<li><a href="#"><i class="icon-twitter"></i></a></li>
-		<li><a href="#"><i class="icon-facebook"></i></a></li>
-		<li><a href="#"><i class="icon-instagram"></i></a></li>
-	</ul>
-</div>
+            {#		<img src="{{ post.article_author.profile_pic.url }}" alt="" class="img-responsive">#}
+        </figure>
+        <h3 class="heading">About Me</h3>
+        <h2>{{ post.article_author.name.get_full_name }}</h2>
+        <a href="mailto:{{ post.article_author.name.email }}">{{ post.article_author.name.email }}</a>
+        <p>{{ post.article_author.details }}</p>
+        <ul class="fh5co-social">
+            <li><a href="#"><i class="icon-twitter"></i></a></li>
+            <li><a href="#"><i class="icon-facebook"></i></a></li>
+            <li><a href="#"><i class="icon-instagram"></i></a></li>
+        </ul>
+    </div>
 {% endblock %}
 
 
 {% block content %}
-{% if post.id > first.id %}
-<a href="{% url 'blog:single_post' id=post.id|add:'-1' %}" class="fh5co-post-prev"><span><i
-			class="icon-chevron-left"></i> Prev</span></a>
-{% endif %}
-{% if post.id < last.id %}
-<a href="{% url 'blog:single_post' id=post.id|add:'1' %}" class="fh5co-post-next"><span>Next <i
-			class="icon-chevron-right"></i></span></a>
-{% endif %}
-<!-- END #fh5co-header -->
-<div class="container-fluid">
-	<div class="row fh5co-post-entry single-entry">
-		<article
-			class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
-			<figure class="animate-box">
-				{% if post.image.url %}
-{#					<img src="{{ post.image.url }}" class="img-responsive">#}
-                    <img src="{% static 'images/single_1.jpg' %}" alt="" class="img-responsive">
-				{% else %}
-					<img src="{% static 'images/single_1.jpg' %}" alt="" class="img-responsive">
-				{% endif %}
-			</figure>
-			<span class="fh5co-meta animate-box"><a
-					href="{% url 'blog:topic' name=post.category.name %}">{{ post.category.name }}</a></span>
-			<h2 class="fh5co-article-title animate-box">{{ post.title }}</h2>
-			<span class="fh5co-meta fh5co-date animate-box">{{ post.posted_on }}</span>
+    {% if post.id > first.id %}
+        <a href="{% url 'blog:single_post' id=post.id|add:'-1' %}" class="fh5co-post-prev"><span><i
+                class="icon-chevron-left"></i> Prev</span></a>
+    {% endif %}
+    {% if post.id < last.id %}
+        <a href="{% url 'blog:single_post' id=post.id|add:'1' %}" class="fh5co-post-next"><span>Next <i
+                class="icon-chevron-right"></i></span></a>
+    {% endif %}
+    <!-- END #fh5co-header -->
+    <div class="container-fluid">
+        <div class="row fh5co-post-entry single-entry">
+            <article
+                    class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+                <figure class="animate-box">
+                    {% if post.image.url %}
+                        {#					<img src="{{ post.image.url }}" class="img-responsive">#}
+                        <img src="{% static 'images/single_1.jpg' %}" alt="" class="img-responsive">
+                    {% else %}
+                        <img src="{% static 'images/single_1.jpg' %}" alt="" class="img-responsive">
+                    {% endif %}
+                </figure>
+                <span class="fh5co-meta animate-box"><a
+                        href="{% url 'blog:topic' name=post.category.name %}">{{ post.category.name }}</a></span>
+                <h2 class="fh5co-article-title animate-box">{{ post.title }}</h2>
+                <span class="fh5co-meta fh5co-date animate-box">{{ post.posted_on }}</span>
 
-			<div
-				class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-left content-article">
-				<div class="row">
-					<div class="col-lg-12 cp-r animate-box">
-						{% if post.video %}
-						{{ post.video|safe }}
-						{% endif %}
-						<p>{{ post.body|safe|linebreaks }}</p>
-						<p class="text-info">{{ total_likes }} Like{{ total_likes|pluralize }}</p>
-						{% if user.is_authenticated %}
-						<form action="{% url 'blog:like_post' %}" method="POST">
-							{% csrf_token %}
-							{% if is_liked %}
-							<button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger">Dislike</button>
-							{% else %}
-							<button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-success">Like</button>
-							{% endif %}
-						</form>
-						{% endif %}
-					</div>
-				</div>
-			</div>
-		</article>
-	</div>
-</div>
-<div class="container">
-	<a href="{% url 'blog:pdf' id=post.id %}" target="_blank">Save as pdf</a>
-	<h3 class="well">Related Post</h3>
-	{% for r in related %}
-	<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
-		<figure class="animate-box">
-			<a href="{% url 'blog:single_post' id=r.id %}"><img src="{{ r.image.url }}" class="img-responsive"></a>
-			<a href="{% url 'blog:single_post' id=r.id %}">
-				<h3>{{ r.title }}</h3>
-			</a>
-			<div class="col-lg-12 cp-r animate-box text-left">
-				<p>{{ r.body|truncatewords:5 }}</p>
-			</div>
-		</figure>
-	</article>
-	{% endfor %}
-</div>
-<div class="single_post_comment container">
-	<h3 class="well container">Comments</h3>
-	{% for comment in comments %}
-	<div class="single_comment">
-		<h4>{{ comment.name }}</h4>
-		<h5 class="text">{{ comment.email }}</h5>
-		<p>{{ comment.post_comment|safe }}</p>
-	</div>
-	{% empty %}
-	<p>Comment not found</p>
-	{% endfor %}
-</div>
-{#	<div class="panel panel-default container">#}
-{#		<div class="panel-heading">#}
-{#			<h3 class="panel-title">Comment</h3>#}
-{#		</div>#}
-{#		<div class="panel-body">#}
-{#			<form action="" method="POST">#}
-{#				{% csrf_token %}#}
-{#                <div class="form-group">#}
-{#                    {{ form.as_p }}#}
-{#                </div>#}
-{#				<!-- {{ form.media }} -->#}
-{#				{{ form.as_p }}#}
-{#				<button type="submit" class="btn btn-success btn-group-justified">Submit</button>#}
-{#			</form>#}
-{#		</div>#}
-{#	</div>#}
-<div class="container">
-	<form>
-		{% csrf_token %}
-		<div class="form-group">
-			<div class="input-group">
-				{{ form.as_p }}
-			</div>
-		</div>
-		<div class="form-group">
-			<input value="Submit" type="submit" class="btn btn-success btn-lg ">
-		</div>
-	</form>
-</div>
+                <div
+                        class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-left content-article">
+                    <div class="row">
+                        <div class="col-lg-12 cp-r animate-box">
+                            {% if post.video %}
+                                {{ post.video|safe }}
+                            {% endif %}
+                            <p>{{ post.body|safe|linebreaks }}</p>
+
+{#                            like section#}
+                            <p class="text-info">{{ total_likes }} Like{{ total_likes|pluralize }} </p>
+                            {% if user.is_authenticated %}
+                                <a class="like-btn btn btn-success btn-sm" data-href="{{ post.get_api_like_url }}" data-likes="{{ post.likes.count }}" href="{{ post.get_like_url }}">
+{#                                {% if is_liked %}#}
+{#                                    <button type="submit" name="post_id" value="{{ post.id }}"#}
+{#                                            class="btn btn-danger">Dislike#}
+{#                                    </button>#}
+{#                                {% else %}#}
+{#                                    <button type="submit" name="post_id" value="{{ post.id }}"#}
+{#                                            class="btn btn-success">Like#}
+{#                                    </button>#}
+{#                                {% endif %}#}
+                                {{ post.likes.count }} Like
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+    <div class="container">
+        <a href="{% url 'blog:pdf' id=post.id %}" target="_blank">Save as pdf</a>
+        <h3 class="well">Related Post</h3>
+        {% for r in related %}
+            <article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
+                <figure class="animate-box">
+                    <a href="{% url 'blog:single_post' id=r.id %}"><img src="{{ r.image.url }}" class="img-responsive"></a>
+                    <a href="{% url 'blog:single_post' id=r.id %}">
+                        <h3>{{ r.title }}</h3>
+                    </a>
+                    <div class="col-lg-12 cp-r animate-box text-left">
+                        {#                        <p>{{ r.body|truncatewords:5 }}</p>#}
+                    </div>
+                </figure>
+            </article>
+        {% endfor %}
+    </div>
+    <div class="single_post_comment container">
+        <h3 class="well container">Comments</h3>
+        {% for comment in comments %}
+            <div class="single_comment">
+                <h4>{{ comment.name }}</h4>
+                <h5 class="text">{{ comment.email }}</h5>
+                <p>{{ comment.post_comment|safe }}</p>
+            </div>
+        {% empty %}
+            <p>Comment not found</p>
+        {% endfor %}
+    </div>
+    {#	<div class="panel panel-default container">#}
+    {#		<div class="panel-heading">#}
+    {#			<h3 class="panel-title">Comment</h3>#}
+    {#		</div>#}
+    {#		<div class="panel-body">#}
+    {#			<form action="" method="POST">#}
+    {#				{% csrf_token %}#}
+    {#                <div class="form-group">#}
+    {#                    {{ form.as_p }}#}
+    {#                </div>#}
+    {#				<!-- {{ form.media }} -->#}
+    {#				{{ form.as_p }}#}
+    {#				<button type="submit" class="btn btn-success btn-group-justified">Submit</button>#}
+    {#			</form>#}
+    {#		</div>#}
+    {#	</div>#}
+    <div class="container">
+        <form>
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="input-group">
+                    {{ form.as_p }}
+                </div>
+            </div>
+            <div class="form-group">
+                <input value="Submit" type="submit" class="btn btn-success btn-lg ">
+            </div>
+        </form>
+    </div>
 {% endblock %}
 
 {% block script %}
 {% endblock %}
+
+{#<script>#}
+{#    {% block jquery %}#}
+{#        #}
+{#    {% endblock %}#}
+{#</script>#}
+
+

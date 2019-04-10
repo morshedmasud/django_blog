@@ -1,6 +1,8 @@
 from django.shortcuts import render, Http404, get_object_or_404, redirect, HttpResponse, HttpResponseRedirect
 from .models import author, category, article, Comment
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
@@ -12,6 +14,8 @@ from django.views import View
 from .require import render_to_pdf
 from django.template.loader import get_template
 import datetime
+from django.http import JsonResponse
+from django.views.generic import RedirectView
 
 # for mail
 from django.contrib.sites.shortcuts import get_current_site
@@ -90,19 +94,61 @@ def getsingle(request, id):
 
 
 
-def like_post(request):
-    post = get_object_or_404(article, id=request.POST.get('post_id'))
-    is_liked = False
-    if post.likes.filter(id=request.user.id).exists():
-        post.likes.remove(request.user)
+# def like_post(request, id):
+#     post = get_object_or_404(article, id=id)
+#     is_liked = False
+#     if post.likes.filter(id=request.user.id).exists():
+#         post.likes.remove(request.user)
+#         is_liked = False
+#     else:
+#         post.likes.add(request.user)
+#         is_liked = True
+#     return redirect("blog:single_post", post.id)
+
+
+
+class PostlikeToggle(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        post = get_object_or_404(article, id=self.kwargs.get("id"))
         is_liked = False
-    else:
-        post.likes.add(request.user)
-        is_liked = True
+        user = self.request.user.id
+        if post.likes.filter(id=user).exists():
+            post.likes.remove(user)
+            is_liked = False
+        else:
+            post.likes.add(user)
+            is_liked = True
+        url_ = post.get_single_url()
+        return url_
 
-    post_id = request.POST.get("post_id")
-    return redirect("blog:single_post", post_id)
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import authentication, permissions
+from django.contrib.auth.models import User
+
+class PostlikeAPIToggle(APIView):
+    authentication_classes = (authentication.SessionAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, id=None, format=None):
+        post = get_object_or_404(article, id=id)
+        user = self.request.user
+        updated = False
+        liked = False
+        if user in post.likes.all():
+            liked = False
+            post.likes.remove(user)
+        else:
+            post.likes.add(user)
+            liked = True
+        updated = True
+
+        data = {
+            'updated': updated,
+            'liked': liked,
+        }
+        return Response(data)
 
 
 def gettopic(request, name):
