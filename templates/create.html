@@ -11,13 +11,14 @@
 
 {% block content %}
 <div class="container">
+    <div class="" style="margin: 5px; padding: 50px">
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
             {{ form.media }}
-        {{ form.as_p }}
+        {{ form }}
         <button class="btn btn-success">Submit</button>
     </form>
-
+    </div>
 </div>
 {% endblock %}
 

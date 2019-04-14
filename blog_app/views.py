@@ -64,14 +64,16 @@ def getsingle(request, id):
     post = get_object_or_404(article, pk=id)
     first = article.objects.first()
     last = article.objects.last()
-    get_comment = Comment.objects.filter(post=id)
+    get_comment = Comment.objects.filter(post=id).order_by('-id')
     related = article.objects.filter(category=post.category).exclude(id=id)[:4]
     if request.method == 'POST':
         form = CommentForm(request.POST or None)
         if form.is_valid:
             instance = form.save(commit=False)
-            instance.post=post
+            instance.post = post
+            instance.user = request.user
             instance.save()
+            print("test")
             messages.success(request, 'Comment added')
     else:
         form = CommentForm

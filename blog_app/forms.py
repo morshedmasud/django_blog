@@ -14,7 +14,10 @@ class ArticleForm(forms.ModelForm):
             'image',
             'category'
         ]
-
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'video': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 class RegisterUser(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')
@@ -54,19 +57,17 @@ class CreateAuthor(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-
+    post_comment = forms.CharField(widget=forms.Textarea(attrs={"class": 'form-control', 'cols':30, 'rows': 5, 'placeholder': 'Say something... ' }), label='')
     class Meta:
         model = Comment
         fields = [
-            'name',
-            'email',
             'post_comment'
         ]
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.TextInput(attrs={"class": 'form-control'}),
-            'post_comment': forms.Textarea(attrs={"class": 'form-control'})
-        }
+        # widgets = {
+        #     # 'name': forms.TextInput(attrs={'class': 'form-control'}),
+        #     # 'email': forms.TextInput(attrs={"class": 'form-control'}),
+        #     'post_comment': forms.Textarea(attrs={"class": 'form-control', 'cols':30, 'rows': 5, 'placeholder': 'Say something... ' })
+        # }
 
 
 class CategoryForm(forms.ModelForm):

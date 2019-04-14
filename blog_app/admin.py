@@ -31,7 +31,7 @@ class categoryModel(admin.ModelAdmin):
 admin.site.register(category, categoryModel)
 
 class CommentModel(admin.ModelAdmin):
-    list_display = ['__str__']
+    list_display = ['__str__', 'timestamp']
     search_fields = ['__str__']
     list_per_page = 10
     class Meta:
