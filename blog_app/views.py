@@ -64,17 +64,23 @@ def getsingle(request, id):
     post = get_object_or_404(article, pk=id)
     first = article.objects.first()
     last = article.objects.last()
-    get_comment = Comment.objects.filter(post=id).order_by('-id')
+    get_comment = Comment.objects.filter(post=id, reply = None).order_by('-id')
+    reply = request.POST.get('comment_id')
     related = article.objects.filter(category=post.category).exclude(id=id)[:4]
     if request.method == 'POST':
         form = CommentForm(request.POST or None)
         if form.is_valid:
             instance = form.save(commit=False)
+            reply_id = request.POST.get('comment_id')
+            if reply_id:
+                reply_qs = Comment.objects.get(id=reply_id)
+                instance.reply = reply_qs
             instance.post = post
             instance.user = request.user
             instance.save()
             print("test")
             messages.success(request, 'Comment added')
+            return HttpResponseRedirect(post.get_single_url())
     else:
         form = CommentForm
 

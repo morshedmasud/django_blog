@@ -59,8 +59,7 @@ class article(models.Model):
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     post = models.ForeignKey(article, on_delete=models.CASCADE)
-    # email = models.EmailField(max_length=200)
-    # post_comment = RichTextField()
+    reply = models.ForeignKey('Comment', null=True, related_name='replies', on_delete=models.CASCADE)
     post_comment = models.TextField(max_length=200)
     timestamp = models.DateTimeField(auto_now_add=True, null=True)
 

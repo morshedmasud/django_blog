@@ -57,7 +57,7 @@ class CreateAuthor(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    post_comment = forms.CharField(widget=forms.Textarea(attrs={"class": 'form-control', 'cols':30, 'rows': 5, 'placeholder': 'Say something... ' }), label='')
+    post_comment = forms.CharField(widget=forms.Textarea(attrs={"class": 'form-control', 'cols': 40, 'rows': 4, 'placeholder': 'Say something... ' }), label='')
     class Meta:
         model = Comment
         fields = [

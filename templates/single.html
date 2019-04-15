@@ -117,13 +117,66 @@
     </div>
     <div class="single_post_comment container">
         <h3 class="well container"> {{ comments.count }} Discuss{{ comments|pluralize }}</h3>
+        <div class="container">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group ">
+                    <div class="input-group ">
+                        {#                    {{ form.media }}#}
+                        {{ form }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {% if request.user.is_authenticated %}
+                        <button class="btn btn-success btn-sm rounded-0">Post Comment</button>
+                    {% else %}
+                        <a onclick="myFunction()" class="btn btn-success btn-sm rounded-0 " disabled>Post Comment</a>
+
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+
         {% for comment in comments %}
             <div class="single_comment">
                 <blockquote class="blockquote">
                     <p class="" style="margin-bottom: 0;">{{ comment.post_comment }}</p>
                     <footer class="blockquote-footer">by <cite title="Source Title">{{ comment.user|capfirst }}</cite>
+{#                        <button type="button" name="button" class="reply-btn btn btn-outline btn-info btn-sm">Reply</button>#}
+{#                        <a onclick="replyFunction()" class="btn btn-success btn-sm rounded-0 ">Reply</a>#}
+
                     </footer>
                 </blockquote>
+            </div>
+
+            <div style="margin-left: 50px; " class="replied-comments container">
+                {% for reply in comment.replies.all %}
+                <blockquote class="blockquote">
+                    <p class="" style="margin-bottom: 0;">{{ reply.post_comment }}</p>
+                    <footer class="blockquote-footer">by <cite title="Source Title">{{ reply.user|capfirst }}</cite>
+                    </footer>
+                </blockquote>
+                {% endfor %}
+                <div class="form-group row">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group ">
+                            <div class="input-group ">
+                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                {#                    {{ form.media }}#}
+                                {{ form }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {% if request.user.is_authenticated %}
+                                <button class="btn btn-success btn-sm rounded-0">Reply</button>
+                            {% else %}
+                                <a onclick="myFunction()" class="btn btn-success btn-sm rounded-0 " disabled>Reply</a>
+
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
             </div>
         {% empty %}
             <p>No Discussion</p>
@@ -131,25 +184,7 @@
 
     </div>
 
-    <div class="container">
-        <form method="POST">
-            {% csrf_token %}
-            <div class="form-group ">
-                <div class="input-group ">
-                    {#                    {{ form.media }}#}
-                    {{ form }}
-                </div>
-            </div>
-            <div class="form-group">
-                {% if request.user.is_authenticated %}
-                    <button class="btn btn-success btn-sm rounded-0">Post Comment</button>
-                {% else %}
-                    <a onclick="myFunction()" class="btn btn-success btn-sm rounded-0 " disabled>Post Comment</a>
 
-                {% endif %}
-            </div>
-        </form>
-    </div>
 {% endblock %}
 
 {% block script %}
@@ -157,6 +192,11 @@
         function myFunction() {
             alert("You have to login first.");
         }
+
+        $('.reply-btn').click(function () {
+            $(this).parent().parent().next('.replied-comments').fadeToggle()
+        });
+
     </script>
 {% endblock %}
 
