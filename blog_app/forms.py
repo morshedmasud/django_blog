@@ -19,14 +19,33 @@ class ArticleForm(forms.ModelForm):
             'video': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
+
 class RegisterUser(UserCreationForm):
-    email = forms.EmailField(max_length=200, help_text='Required')
-    password1 = forms.CharField(label="Password",widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Confirm Password",widget=forms.PasswordInput)
+    email = forms.EmailField(max_length=200, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your email..'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter Password ...',}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm Password ...',}))
+
+    # class Meta:
+    #     model = User
+    #     fields = ('username', 'first_name', 'last_name', 'email')
+
 
     class Meta:
         model = User
-        fields = ('username','first_name','last_name','email')
+        fields = (
+            'first_name',
+            'last_name',
+            'email',
+            'username',
+            'password1',
+            'password2'
+        )
+
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            }
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -34,17 +53,6 @@ class RegisterUser(UserCreationForm):
             raise forms.ValidationError("Password didn't match")
         else:
             return cd['password2']
-
-    # class Meta:
-    #     model = User
-    #     fields = [
-    #         'first_name',
-    #         'last_name',
-    #         'email',
-    #         'username',
-    #         'password1',
-    #         'password2'
-    #     ]
 
 
 class CreateAuthor(forms.ModelForm):

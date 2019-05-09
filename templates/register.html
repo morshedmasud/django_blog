@@ -12,9 +12,9 @@
 
 {% block content %}
 <div class="container">
+    <h3 class="text-center">Registration</h3>
     <form action="" method="POST">
         {% csrf_token %}
-        <h4 class="well">Sign up</h4>
         {{ form.as_p }}
         <button class="btn btn-primary">Register</button>
     </form>
