@@ -20,7 +20,7 @@ pylint==2.2.2
 PyPDF2==1.26.0
 python-dateutil==1.5
 pytz==2018.7
-reportlab==3.5.12
+reportlab==3.5.55
 requests==2.20.1
 six==1.11.0
 typed-ast==1.1.0
